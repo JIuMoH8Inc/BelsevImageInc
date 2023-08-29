@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small_top_margin">4dp</dimen>
+    <dimen name="top_margin">8dp</dimen>
+    <dimen name="large_top_margin">16dp</dimen>
+    <dimen name="extra_large_top_margin">24dp</dimen>
+    <dimen name="huge_top_margin">32dp</dimen>
+    <dimen name="horizontal_margin">16dp</dimen>
+    <dimen name="app_logo_size">128dp</dimen>
+    <dimen name="progress_bar_size">32dp</dimen>
+    <dimen name="loading_button_height">48dp</dimen>
+    <dimen name="photo_item_size">100dp</dimen>
+    <dimen name="photo_padding">10dp</dimen>
+</resources>

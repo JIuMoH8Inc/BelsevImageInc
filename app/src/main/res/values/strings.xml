@@ -1,0 +1,20 @@
+<resources>
+    <!-- Общие строки -->
+
+    <string name="app_name">Belsev image</string>
+    <string name="error_text">Ошибка</string>
+    <string name="try_again_later">Повторите позднее</string>
+    <string name="sign_in_text">Войти</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+
+    <!-- Тексты ошибок -->
+    <string name="no_internet_error">Нет подключения к интернету</string>
+    <string name="invalid_login_password_error">Неверный логин или пароль</string>
+    <string name="unknown_error_text">Произошла непредвиденная ошибка</string>
+
+    <!-- Альбомы -->
+    <string name="album_toolbar_title">Альбомы</string>
+    <!-- Фото -->
+    <string name="photo_toolbar_title">Фото</string>
+</resources>

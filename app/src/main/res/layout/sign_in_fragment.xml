@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="@dimen/huge_top_margin"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/app_logo_size"
+        android:layout_height="@dimen/app_logo_size"
+        app:srcCompat="@drawable/app_logo"
+        android:layout_gravity="center"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/MaterialEditTextClear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_input"
+        android:layout_marginTop="@dimen/extra_large_top_margin"
+        android:layout_marginHorizontal="@dimen/horizontal_margin">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:id="@+id/login_edit_text"
+            android:layout_height="wrap_content"
+            style="@style/EditTextOneLineStyle"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/MaterialEditTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/password_input"
+        android:layout_marginHorizontal="@dimen/horizontal_margin"
+        android:layout_marginTop="@dimen/small_top_margin">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:id="@+id/password_edit_text"
+            android:layout_height="wrap_content"
+            style="@style/EditTextOneLinePasswordStyle"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.example.picturegallery.ui.views.LoadingButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/huge_top_margin"
+        app:buttonText="@string/sign_in_text"
+        app:isButtonEnabled="false"
+        android:id="@+id/sign_in_button"
+        android:gravity="center"
+        android:layout_marginHorizontal="@dimen/horizontal_margin"/>
+
+</LinearLayout>

@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.picturegallery.R
-import com.example.picturegallery.databinding.AlbumPhotoFragmentBinding
+import com.example.picturegallery.databinding.ListItemFragmentBinding
 import com.example.picturegallery.feature.albums.action.AlbumsFragmentAction
 import com.example.picturegallery.feature.albums.adapter.AlbumAdapter
 import com.example.picturegallery.feature.albums.intent.AlbumsFragmentIntent
@@ -19,9 +19,9 @@ import com.example.picturegallery.utils.extensions.setLoadingState
 import com.faltenreich.skeletonlayout.applySkeleton
 import com.tapadoo.alerter.Alerter
 
-class AlbumFragment: BaseFragment<AlbumViewModel>(R.layout.album_photo_fragment) {
+class AlbumFragment: BaseFragment<AlbumViewModel>(R.layout.list_item_fragment) {
 
-    private val binding by viewBinding(AlbumPhotoFragmentBinding::bind)
+    private val binding by viewBinding(ListItemFragmentBinding::bind)
     private lateinit var albumAdapter: AlbumAdapter
 
     private val skeleton by lazy {

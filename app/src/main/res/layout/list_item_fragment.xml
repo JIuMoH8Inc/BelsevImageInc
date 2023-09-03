@@ -10,13 +10,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/photo_list"
+        android:id="@+id/item_list"
         android:layout_gravity="center"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/fab_add"
+        android:contentDescription="@string/add_text"
         app:layout_behavior=".utils.fab.AppearingFabBehaviour"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="16dp"

@@ -8,10 +8,10 @@
         android:id="@+id/albumFragment"
         android:name="com.example.picturegallery.feature.albums.fragment.AlbumFragment"
         android:label="album_photo_fragment"
-        tools:layout="@layout/album_photo_fragment" />
+        tools:layout="@layout/list_item_fragment" />
     <fragment
         android:id="@+id/photosFragment"
         android:name="com.example.picturegallery.feature.photos.fragment.PhotosFragment"
         android:label="photos_fragment"
-        tools:layout="@layout/photos_fragment" />
+        tools:layout="@layout/list_item_fragment" />
 </navigation>

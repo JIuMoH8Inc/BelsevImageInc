@@ -7,9 +7,9 @@ import javax.inject.Inject
 class GetPhotosUseCase @Inject constructor(
     private val photosRepository: PhotosRepository
 ) {
-    suspend operator fun invoke(): List<PhotosAdapterUiState> {
+    suspend operator fun invoke(skip: Int, photoCount: Int): List<PhotosAdapterUiState> {
         val resultList = mutableListOf<PhotosAdapterUiState>()
-        photosRepository.getPhotos().list.forEach { photoCover ->
+        photosRepository.getPhotos(skip, photoCount).list.forEach { photoCover ->
             resultList.add(
                 PhotosAdapterUiState(
                     picture = PhotosAdapterUiState.getPictureThumb(photoCover.thumbnail)

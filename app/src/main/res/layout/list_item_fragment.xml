@@ -20,8 +20,24 @@
         android:contentDescription="@string/add_text"
         app:layout_behavior=".utils.fab.AppearingFabBehaviour"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="@dimen/horizontal_margin"
+        android:layout_marginBottom="@dimen/horizontal_margin"
         android:src="@drawable/baseline_add_24"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/paging_load_back"
+        android:visibility="gone"
+        android:background="@color/black_background_loading"/>
+
+    <ProgressBar
+        android:layout_width="@dimen/progress_bar_loading_size"
+        android:layout_height="@dimen/progress_bar_loading_size"
+        android:id="@+id/paging_loading_item"
+        android:layout_gravity="center|bottom"
+        android:visibility="gone"
+        android:indeterminateTint="@color/light_blue"
+        android:layout_marginBottom="@dimen/horizontal_margin"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

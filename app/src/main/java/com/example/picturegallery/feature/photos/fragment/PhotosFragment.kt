@@ -2,10 +2,13 @@ package com.example.picturegallery.feature.photos.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.picturegallery.R
 import com.example.picturegallery.databinding.ListItemFragmentBinding
+import com.example.picturegallery.feature.pagination.PaginationScrollListener
 import com.example.picturegallery.feature.photos.adapter.adapter.PhotosAdapter
 import com.example.picturegallery.feature.photos.intent.PhotoFragmentIntent
 import com.example.picturegallery.feature.photos.uistate.PhotosUiState
@@ -31,12 +34,12 @@ class PhotosFragment: BaseFragment<PhotosViewModel>(R.layout.list_item_fragment)
         super.onViewCreated(view, savedInstanceState)
         initViews()
         observeFlow()
-        viewModel.handleIntent(PhotoFragmentIntent.OnLoadPhotoList)
+        viewModel.handleIntent(PhotoFragmentIntent.OnLoadPhotoList(true, 0))
     }
-
     private fun initViews() = with(binding) {
+        val gridLayoutManager = GridLayoutManager(requireContext(), 3)
         itemList.apply {
-            layoutManager = GridLayoutManager(requireContext(), 3)
+            layoutManager = gridLayoutManager
             adapter = photoAdapter
         }
 
@@ -55,6 +58,36 @@ class PhotosFragment: BaseFragment<PhotosViewModel>(R.layout.list_item_fragment)
         setActionBarTitle(uiState.toolbarTitle)
         photoAdapter.submitList(uiState.photoList)
         skeleton.setLoadingState(uiState.isLoading)
+
+        pagingLoadingItem.isVisible = uiState.isNextPageLoading
+        pagingLoadBack.isVisible = uiState.isNextPageLoading
+
+        photoAdapter.registerAdapterDataObserver(
+            object : RecyclerView.AdapterDataObserver() {
+                override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                    if (!uiState.isLastPage)
+                        itemList.smoothScrollToPosition(positionStart)
+                }
+            }
+        )
+
+        itemList.apply {
+            clearOnScrollListeners()
+            addOnScrollListener(
+                object : PaginationScrollListener() {
+                    override fun needLoadMoreItems(offset: Int) {
+                        viewModel.handleIntent(
+                            PhotoFragmentIntent.OnLoadPhotoList(false, offset)
+                        )
+                    }
+
+                    override fun isLastPage(): Boolean = uiState.isLastPage
+
+                    override fun isLoading(): Boolean = uiState.isNextPageLoading
+
+                }
+            )
+        }
     }
 
     override fun getViewModelClass() = PhotosViewModel::class.java

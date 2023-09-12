@@ -2,22 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFlowFragment">
+    app:startDestination="@id/signInFlowFragment">
 
-    <fragment
-        android:id="@+id/splashFlowFragment"
-        android:name="com.example.picturegallery.ui.fragment.SplashFlowFragment"
-        android:label="SplashFlowFragment" >
-        <action
-            android:id="@+id/action_splashFlowFragment_to_signInFlowFragment"
-            app:destination="@id/signInFlowFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/splashFlowFragment"
-            app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_splashFlowFragment_to_mainFlowFragment"
-            app:destination="@id/mainFlowFragment" />
-    </fragment>
     <fragment
         android:id="@+id/signInFlowFragment"
         android:name="com.example.picturegallery.feature.signin.SignInFlowFragment"

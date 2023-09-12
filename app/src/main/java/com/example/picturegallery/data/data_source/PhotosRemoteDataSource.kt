@@ -15,6 +15,6 @@ interface PhotosRemoteDataSource {
     }
 
     @GET("$photosUrl/getPhotos")
-    suspend fun getPhotos(@Query("skip") skip: Int? = 0, @Query("take") take: Int? = 24): PhotoResponse
+    suspend fun getPhotos(@Query("skip") skip: Int? = 0, @Query("take") take: Int? = 20): PhotoResponse
 
 }

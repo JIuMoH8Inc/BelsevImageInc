@@ -9,11 +9,12 @@ import com.example.picturegallery.feature.photos.uistate.PhotosAdapterUiState
 
 class PhotosAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var photoList: List<PhotosAdapterUiState> = emptyList()
+    private var photoList: MutableList<PhotosAdapterUiState> = mutableListOf()
 
     fun submitList(photos: List<PhotosAdapterUiState>) {
-        photoList = photos
-        notifyDataSetChanged()
+        val index = photoList.lastIndex
+        photoList.addAll(photos)
+        notifyItemRangeInserted(index, photoList.lastIndex)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

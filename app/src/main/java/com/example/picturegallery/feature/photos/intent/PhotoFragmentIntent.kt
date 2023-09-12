@@ -1,5 +1,5 @@
 package com.example.picturegallery.feature.photos.intent
 
 sealed interface PhotoFragmentIntent {
-    object OnLoadPhotoList : PhotoFragmentIntent
+    data class OnLoadPhotoList(val isInitLoading: Boolean, val offset: Int) : PhotoFragmentIntent
 }

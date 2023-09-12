@@ -11,4 +11,5 @@
     <dimen name="loading_button_height">48dp</dimen>
     <dimen name="photo_item_size">100dp</dimen>
     <dimen name="photo_padding">10dp</dimen>
+    <dimen name="progress_bar_loading_size">48dp</dimen>
 </resources>

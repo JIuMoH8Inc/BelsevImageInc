@@ -8,7 +8,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.picturegallery.R
 import com.example.picturegallery.databinding.ListItemFragmentBinding
 import com.example.picturegallery.feature.albums.action.AlbumsFragmentAction
-import com.example.picturegallery.feature.albums.adapter.AlbumAdapter
+import com.example.picturegallery.feature.albums.adapter.adapter.AlbumAdapter
 import com.example.picturegallery.feature.albums.intent.AlbumsFragmentIntent
 import com.example.picturegallery.feature.albums.uistate.AlbumsFragmentUiState
 import com.example.picturegallery.feature.albums.viewmodel.AlbumViewModel

@@ -1,10 +1,11 @@
-package com.example.picturegallery.feature.albums.adapter
+package com.example.picturegallery.feature.albums.adapter.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.picturegallery.databinding.AlbumItemBinding
+import com.example.picturegallery.feature.albums.adapter.viewholder.AlbumViewHolder
 import com.example.picturegallery.feature.albums.uistate.AlbumAdapterUiState
 
 class AlbumAdapter(private val onItemClick: (Int) -> Unit, private val onMoreClick: (AlbumAdapterUiState) -> Unit) :
@@ -29,17 +30,4 @@ class AlbumAdapter(private val onItemClick: (Int) -> Unit, private val onMoreCli
         (holder as AlbumViewHolder).bind(albumList[position], onItemClick, onMoreClick)
     }
 
-    class AlbumViewHolder(private val binding: AlbumItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(albumUiState: AlbumAdapterUiState, onAlbumCLick: (Int) -> Unit, onMoreClick: (AlbumAdapterUiState) -> Unit)  = with(binding) {
-            albumThumbnail.setImageBitmap(albumUiState.albumThumb)
-
-            more.setOnClickListener {
-                onMoreClick(albumUiState)
-            }
-
-            root.setOnClickListener {
-                onAlbumCLick(albumUiState.id)
-            }
-        }
-    }
 }

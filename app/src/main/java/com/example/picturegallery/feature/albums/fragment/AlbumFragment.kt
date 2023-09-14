@@ -36,12 +36,8 @@ class AlbumFragment: BaseFragment<AlbumViewModel>(R.layout.list_item_fragment) {
     }
 
     private fun initViews() {
-        albumAdapter = AlbumAdapter(
-            { albumId ->
-                viewModel.handleIntent(AlbumsFragmentIntent.OnAlbumClick(albumId))
-            }
-        ) { album ->
-            viewModel.handleIntent(AlbumsFragmentIntent.OnMoreClick(album))
+        albumAdapter = AlbumAdapter { albumId ->
+            viewModel.handleIntent(AlbumsFragmentIntent.OnAlbumClick(albumId))
         }
 
         binding.itemList.apply {

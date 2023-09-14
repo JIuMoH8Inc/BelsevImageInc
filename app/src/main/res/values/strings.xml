@@ -16,6 +16,9 @@
 
     <!-- Альбомы -->
     <string name="album_toolbar_title">Альбомы</string>
+        <!-- Меню -->
+        <string name="album_popup_menu_delete_text">Удалить альбом</string>
+        <string name="album_popup_menu_edit_text">Переименовать альбом</string>
     <!-- Фото -->
     <string name="photo_toolbar_title">Фото</string>
 </resources>

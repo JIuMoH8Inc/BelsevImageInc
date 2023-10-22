@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/horizontal_margin">
+
+    <com.example.picturegallery.ui.views.InfoView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/error_item"/>
+
+    <com.example.picturegallery.ui.views.ZoomedImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/photo_container"/>
+
+</FrameLayout>

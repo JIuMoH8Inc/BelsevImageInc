@@ -144,6 +144,14 @@
         <item name="android:textColor">@color/red</item>
     </style>
 
+    <style name="Text_22_Black_bold" parent="Text_12_Black_Bold">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="Text_16_Black" parent="Text_Black_12">
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="EditTextOneLineStyle" parent="EditTextStyle">
         <item name="maxLines">1</item>
         <item name="android:inputType">textCapWords|text</item>

@@ -1,6 +1,5 @@
 package com.example.picturegallery.feature.photos
 
-
 data class PhotosUiState(
     val toolbarTitle: String = "",
     val photoList: List<PhotosAdapterUiState> = emptyList(),

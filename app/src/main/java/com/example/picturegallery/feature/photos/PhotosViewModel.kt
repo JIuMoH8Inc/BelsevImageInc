@@ -55,7 +55,9 @@ class PhotosViewModel @Inject constructor(
             }
 
             is PhotoFragmentIntent.OnPhotoClick -> {
-                //открытие фото на просмотр
+                _uiAction.tryEmit(
+                    PhotosUiAction.OpenViewPhotoFragment(intent.id)
+                )
             }
 
             is PhotoFragmentIntent.OnSelectPhoto -> {

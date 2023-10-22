@@ -15,5 +15,6 @@ sealed interface PhotosUiAction {
     data class AddPhotosToAlbum(val selectedIdList: List<Int>) : PhotosUiAction
 
     data class OpenChooseAlbumType(val selectedPhotos: IntArray) : PhotosUiAction
+    data class OpenViewPhotoFragment(val id: Int) : PhotosUiAction
 
 }

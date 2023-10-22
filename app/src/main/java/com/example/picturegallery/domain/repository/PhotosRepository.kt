@@ -11,7 +11,7 @@ interface PhotosRepository {
     suspend fun getPhotosWithoutPaging(): PhotoResponse
 
     suspend fun deletePhotos(photoIdList: List<Int>)
-    suspend fun getPhotoFile(id: Int): ResponseBody
+    suspend fun getPhotoFile(id: Int): ByteArray
 
     suspend fun uploadPhotos(albumId: Int? = null, files: List<MultipartBody.Part>)
 

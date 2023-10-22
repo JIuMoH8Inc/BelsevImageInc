@@ -93,6 +93,10 @@ abstract class BaseFragment<VM : BaseViewModel>(@LayoutRes layout: Int) : Fragme
         listener.setActionBarTitle(title)
     }
 
+    protected fun setActionBarTitle(titleRes: Int) {
+        listener.setActionBarTitle(titleRes)
+    }
+
     protected fun showActionBar() {
         listener.showActionBar()
     }

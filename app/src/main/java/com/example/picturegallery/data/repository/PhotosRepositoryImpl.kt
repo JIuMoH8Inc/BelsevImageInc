@@ -31,7 +31,7 @@ class PhotosRepositoryImpl @Inject constructor(
 
     override suspend fun getPhotoFile(id: Int) =
         withContext(appDispatchers.io) {
-            photosRemoteDataSource.downloadPhoto(id)
+            photosRemoteDataSource.downloadPhoto(id).bytes()
         }
 
     override suspend fun uploadPhotos(albumId: Int?, files: List<MultipartBody.Part>) =

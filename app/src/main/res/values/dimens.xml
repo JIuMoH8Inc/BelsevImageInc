@@ -9,7 +9,8 @@
     <dimen name="app_logo_size">128dp</dimen>
     <dimen name="progress_bar_size">32dp</dimen>
     <dimen name="loading_button_height">48dp</dimen>
-    <dimen name="photo_item_size">100dp</dimen>
+    <dimen name="photo_item_size">200dp</dimen>
     <dimen name="photo_padding">10dp</dimen>
     <dimen name="progress_bar_loading_size">48dp</dimen>
+    <dimen name="item_corner_radius">8dp</dimen>
 </resources>

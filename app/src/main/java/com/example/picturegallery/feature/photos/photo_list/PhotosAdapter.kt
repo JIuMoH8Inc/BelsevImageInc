@@ -1,14 +1,12 @@
-package com.example.picturegallery.feature.photos.adapter.adapter
+package com.example.picturegallery.feature.photos.photo_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.picturegallery.databinding.PhotoItemBinding
-import com.example.picturegallery.feature.photos.adapter.viewholder.PhotosViewHolder
-import com.example.picturegallery.feature.photos.uistate.PhotosAdapterUiState
 
-class PhotosAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PhotosAdapter(private val onPhotoClick: (Int) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var photoList: MutableList<PhotosAdapterUiState> = mutableListOf()
 
@@ -29,6 +27,6 @@ class PhotosAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemCount() = photoList.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as PhotosViewHolder).bind(photoList[position])
+        (holder as PhotosViewHolder).bind(photoList[position], onPhotoClick)
     }
 }

@@ -1,6 +1,7 @@
 package com.example.picturegallery.data.data_source
 
 import com.example.picturegallery.domain.model.photos.PhotoResponse
+import okhttp3.ResponseBody
 import retrofit2.Retrofit
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -23,6 +24,6 @@ interface PhotosRemoteDataSource {
     suspend fun deletePhotos(@Body photoIdList: List<Int>)
 
     @GET("$photosUrl/getPhotoFile")
-    suspend fun downloadPhoto(@Query("photoId") id: Int)
+    suspend fun downloadPhoto(@Query("photoId") id: Int): ResponseBody
 
 }

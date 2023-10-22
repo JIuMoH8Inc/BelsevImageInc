@@ -11,6 +11,7 @@
     <string name="created_pattern">Создано: %1$s</string>
     <string name="created">Создано:</string>
     <string name="unknown">неизвестно</string>
+    <string name="try_again_text">Попробовать снова</string>
 
     <!-- Тексты ошибок -->
     <string name="no_internet_error">Нет подключения к интернету</string>
@@ -21,4 +22,6 @@
     <string name="album_toolbar_title">Альбомы</string>
     <!-- Фото -->
     <string name="photo_toolbar_title">Фото</string>
+    <string name="view_photo">Просмотр фото</string>
+    <string name="view_photo_load_error_header">Не удалось загрузить фото</string>
 </resources>

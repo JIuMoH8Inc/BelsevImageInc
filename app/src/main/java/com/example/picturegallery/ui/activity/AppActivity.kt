@@ -1,6 +1,7 @@
 package com.example.picturegallery.ui.activity
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -12,6 +13,8 @@ class AppActivity : AppCompatActivity(), ActionBarListener {
 
     private lateinit var binding: AppActivityLayoutBinding
     private lateinit var navController: NavController
+
+    private var onBackButtonClick: () -> Unit = {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +54,29 @@ class AppActivity : AppCompatActivity(), ActionBarListener {
         }
     }
 
-    override fun showBackButton(isShow: Boolean) {
-        supportActionBar?.setDisplayHomeAsUpEnabled(isShow)
+    override fun setActionBarTitle(titleRes: Int) {
+        supportActionBar?.apply {
+            setTitle(titleRes)
+            show()
+        }
+    }
+
+    override fun setBackButtonVisibility(isShow: Boolean) {
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(isShow)
+        }
+    }
+
+    override fun setOnBackButtonClickListener(onClick: () -> Unit) {
+        onBackButtonClick = onClick
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        android.R.id.home -> {
+            onBackButtonClick()
+            true
+        }
+
+        else -> super.onOptionsItemSelected(item)
     }
 }

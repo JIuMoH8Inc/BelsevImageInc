@@ -1,7 +1,6 @@
-package com.example.picturegallery.feature.photos.adapter.adapter
+package com.example.picturegallery.feature.photos.photo_list
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.picturegallery.feature.photos.uistate.PhotosAdapterUiState
 
 class PhotoDiffUtil(
     private val prevPhotoList: List<PhotosAdapterUiState>,

@@ -3,7 +3,7 @@ package com.example.picturegallery.domain.useCase
 import com.example.picturegallery.R
 import com.example.picturegallery.domain.manager.ResourceManager
 import com.example.picturegallery.domain.repository.PhotosRepository
-import com.example.picturegallery.feature.photos.uistate.PhotosAdapterUiState
+import com.example.picturegallery.feature.photos.photo_list.PhotosAdapterUiState
 import com.example.picturegallery.utils.PictureUtils
 import javax.inject.Inject
 
@@ -19,6 +19,7 @@ class GetPhotosUseCase @Inject constructor(
         photosRepository.getPhotos(skip, photoCount).list.forEach { photoCover ->
             resultList.add(
                 PhotosAdapterUiState(
+                    id = photoCover.id,
                     picture = PictureUtils.getPhotoBitmap(photoCover.thumbnail),
                     title = photoCover.fileName,
                     creationDate = photoCover.creationTime?.let {  date ->

@@ -1,4 +1,4 @@
-package com.example.picturegallery.feature.photos.uistate
+package com.example.picturegallery.feature.photos.photo_list
 
 data class PhotosUiState(
     val toolbarTitle: String = "",

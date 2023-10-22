@@ -3,7 +3,8 @@ package com.example.picturegallery.injection.module
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.picturegallery.feature.albums.viewmodel.AlbumViewModel
-import com.example.picturegallery.feature.photos.viewmodel.PhotosViewModel
+import com.example.picturegallery.feature.photos.photo_list.PhotosViewModel
+import com.example.picturegallery.feature.photos.photo_view.ViewPhotoViewModel
 import com.example.picturegallery.feature.signin.viewmodel.SignInViewModel
 import com.example.picturegallery.injection.annotation.ViewModelKey
 import com.example.picturegallery.ui.fragment.ViewModelFactory
@@ -30,4 +31,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PhotosViewModel::class)
     abstract fun bindPhotosViewModel(viewModel: PhotosViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ViewPhotoViewModel::class)
+    abstract fun bindViewPhotoViewModel(viewModel: ViewPhotoViewModel) : ViewModel
 }

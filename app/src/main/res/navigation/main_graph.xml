@@ -11,7 +11,15 @@
         tools:layout="@layout/list_item_fragment" />
     <fragment
         android:id="@+id/photosFragment"
-        android:name="com.example.picturegallery.feature.photos.fragment.PhotosFragment"
+        android:name="com.example.picturegallery.feature.photos.photo_list.PhotosFragment"
         android:label="photos_fragment"
-        tools:layout="@layout/list_item_fragment" />
+        tools:layout="@layout/list_item_fragment" >
+        <action
+            android:id="@+id/action_photosFragment_to_viewPhotoFragment"
+            app:destination="@id/viewPhotoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewPhotoFragment"
+        android:name="com.example.picturegallery.feature.photos.photo_view.ViewPhotoFragment"
+        android:label="ViewPhotoFragment" />
 </navigation>

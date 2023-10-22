@@ -1,17 +1,12 @@
 package com.example.picturegallery.ui.fragment.base
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.picturegallery.R
+import androidx.navigation.fragment.findNavController
 import com.example.picturegallery.application.MyApp
 import com.example.picturegallery.ui.activity.AppActivity
 import com.example.picturegallery.ui.listener.ActionBarListener
@@ -44,6 +39,7 @@ abstract class BaseFragment<VM : BaseViewModel>(@LayoutRes layout: Int) : Fragme
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeMessageLiveData()
+        setBackClickListener()
     }
 
 
@@ -57,6 +53,10 @@ abstract class BaseFragment<VM : BaseViewModel>(@LayoutRes layout: Int) : Fragme
         listener.setActionBarTitle(title)
     }
 
+    protected fun setActionBarTitle(titleRes: Int) {
+        listener.setActionBarTitle(titleRes)
+    }
+
     protected fun showActionBar() {
         listener.showActionBar()
     }
@@ -65,8 +65,14 @@ abstract class BaseFragment<VM : BaseViewModel>(@LayoutRes layout: Int) : Fragme
         listener.hideActionBar()
     }
 
-    fun showBackButton(isShow: Boolean) {
-        listener.showBackButton(isShow)
+    protected fun setBackButtonVisibility(isShow: Boolean) {
+        listener.setBackButtonVisibility(isShow)
+    }
+
+    private fun setBackClickListener() {
+        listener.setOnBackButtonClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun handleAction(action: BaseErrorAction) {

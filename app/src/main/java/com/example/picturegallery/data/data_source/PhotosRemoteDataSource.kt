@@ -1,6 +1,7 @@
 package com.example.picturegallery.data.data_source
 
 import com.example.picturegallery.domain.model.photos.PhotoResponse
+import okhttp3.ResponseBody
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -16,5 +17,8 @@ interface PhotosRemoteDataSource {
 
     @GET("$photosUrl/getPhotos")
     suspend fun getPhotos(@Query("skip") skip: Int? = 0, @Query("take") take: Int? = 20): PhotoResponse
+
+    @GET("$photosUrl/getPhotoFile")
+    suspend fun getPhotoFile(@Query("photoId") id: Int):ResponseBody
 
 }

@@ -13,5 +13,13 @@
         android:id="@+id/photosFragment"
         android:name="com.example.picturegallery.feature.photos.fragment.PhotosFragment"
         android:label="photos_fragment"
-        tools:layout="@layout/list_item_fragment" />
+        tools:layout="@layout/list_item_fragment" >
+        <action
+            android:id="@+id/action_photosFragment_to_viewPhotoFragment"
+            app:destination="@id/viewPhotoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewPhotoFragment"
+        android:name="com.example.picturegallery.feature.photos.fragment.ViewPhotoFragment"
+        android:label="ViewPhotoFragment" />
 </navigation>

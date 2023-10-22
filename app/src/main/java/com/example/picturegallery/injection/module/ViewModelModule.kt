@@ -10,6 +10,7 @@ import com.example.picturegallery.feature.create_album.CreateAlbumViewModel
 import com.example.picturegallery.feature.photos.PhotosViewModel
 import com.example.picturegallery.feature.photos.choose_add_photo_type.AddPhotoAlbumTypeViewModel
 import com.example.picturegallery.feature.signin.SignInViewModel
+import com.example.picturegallery.feature.photo_view.ViewPhotoViewModel
 import com.example.picturegallery.injection.annotation.ViewModelKey
 import com.example.picturegallery.ui.fragment.ViewModelFactory
 import dagger.Binds
@@ -60,4 +61,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ChooseAlbumViewModel::class)
     abstract fun bindChooseAlbumViewModel(viewModel: ChooseAlbumViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ViewPhotoViewModel::class)
+    abstract fun bindViewPhotoViewModel(viewModel: ViewPhotoViewModel) : ViewModel
 }

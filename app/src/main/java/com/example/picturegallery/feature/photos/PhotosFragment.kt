@@ -18,6 +18,7 @@ import com.example.picturegallery.databinding.ListItemFragmentBinding
 import com.example.picturegallery.feature.pagination.PaginationScrollListener
 import com.example.picturegallery.feature.photos.adapter.adapter.PhotosAdapter
 import com.example.picturegallery.feature.photos.choose_add_photo_type.AddPhotoAlbumTypeBottomSheet
+import com.example.picturegallery.feature.photo_view.ViewPhotoFragment
 import com.example.picturegallery.ui.dialog.AnswerDialog
 import com.example.picturegallery.ui.fragment.base.BaseFragment
 import com.example.picturegallery.utils.extensions.observe
@@ -132,7 +133,6 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(R.layout.list_item_fragment
         setActionBarTitle(uiState.toolbarTitle)
 
         with(photoAdapter) {
-            submitList(uiState.photoList)
             registerAdapterDataObserver(
                 object : RecyclerView.AdapterDataObserver() {
                     override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
@@ -196,6 +196,16 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(R.layout.list_item_fragment
 
             is PhotosUiAction.OpenChooseAlbumType -> {
                 navigate(AddPhotoAlbumTypeBottomSheet.route(action.selectedPhotos))
+            }
+
+            is PhotosUiAction.OpenViewPhotoFragment -> {
+                navigate(
+                    ViewPhotoFragment.route(action.id)
+                )
+            }
+
+            is PhotosUiAction.SetPhotos -> {
+                photoAdapter.submitList(action.photos)
             }
         }
     }

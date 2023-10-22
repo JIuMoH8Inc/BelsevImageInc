@@ -55,7 +55,9 @@ class PhotosViewModel @Inject constructor(
             }
 
             is PhotoFragmentIntent.OnPhotoClick -> {
-                //открытие фото на просмотр
+                _uiAction.tryEmit(
+                    PhotosUiAction.OpenViewPhotoFragment(intent.id)
+                )
             }
 
             is PhotoFragmentIntent.OnSelectPhoto -> {
@@ -165,11 +167,13 @@ class PhotosViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(
                         isLoading = false,
-                        photoList = tempPhotoList.map { photo -> photo.copy() },
                         isNextPageLoading = false,
                         isLastPage = photosUi.size <= LOADING_ITEMS_COUNT
                     )
                 }
+                _uiAction.tryEmit(
+                    PhotosUiAction.SetPhotos(tempPhotoList.map { it.copy() })
+                )
             },
             onError = {
                 _uiState.update {
@@ -193,7 +197,7 @@ class PhotosViewModel @Inject constructor(
                         isSelectionMode = isSelectionMode
                     )
                 }
-                load(false, 0)
+                load(true, 0)
                 showSuccessBanner(
                     resourceManager.getString(R.string.photos_delete_success)
                 )
@@ -253,8 +257,7 @@ class PhotosViewModel @Inject constructor(
             it.copy(
                 isError = false,
                 isEmpty = false,
-                isNextPageLoading = !isInitLoading,
-                photoList = tempPhotoList
+                isNextPageLoading = !isInitLoading
             )
         }
     }

@@ -39,6 +39,7 @@ class PhotosAdapter(
             true -> {
                 holder.bindSelected(getItem(position))
             }
+
             else -> {
                 onBindViewHolder(holder, position)
             }

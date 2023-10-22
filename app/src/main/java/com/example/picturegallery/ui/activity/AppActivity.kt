@@ -15,6 +15,8 @@ class AppActivity : AppCompatActivity(), ActionBarListener {
     private lateinit var binding: AppActivityLayoutBinding
     private lateinit var navController: NavController
 
+    private var onBackButtonClick: () -> Unit = {}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,7 +41,7 @@ class AppActivity : AppCompatActivity(), ActionBarListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-         android.R.id.home -> {
+        android.R.id.home -> {
             onBackPressedDispatcher.onBackPressed()
             true
         }
@@ -62,8 +64,19 @@ class AppActivity : AppCompatActivity(), ActionBarListener {
         }
     }
 
+    override fun setActionBarTitle(titleRes: Int) {
+        supportActionBar?.apply {
+            setTitle(titleRes)
+            show()
+        }
+    }
+
     override fun showBackButton(isShow: Boolean) {
         supportActionBar?.setDisplayHomeAsUpEnabled(isShow)
+    }
+
+    override fun setOnBackButtonClickListener(onClick: () -> Unit) {
+        onBackButtonClick = onClick
     }
 
     override fun setMenuProvider(menuProvider: MenuProvider) {

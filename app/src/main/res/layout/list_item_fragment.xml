@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/fab_add"
         android:contentDescription="@string/add_text"
-        app:layout_behavior=".utils.fab.AppearingFabBehaviour"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/horizontal_margin"
         android:layout_marginBottom="@dimen/horizontal_margin"

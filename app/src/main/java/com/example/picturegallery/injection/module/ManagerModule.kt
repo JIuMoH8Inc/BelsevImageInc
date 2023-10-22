@@ -1,8 +1,10 @@
 package com.example.picturegallery.injection.module
 
 import com.example.picturegallery.data.manager.FileManagerImpl
+import com.example.picturegallery.data.manager.ImageManagerImpl
 import com.example.picturegallery.data.manager.ResourceManagerImpl
 import com.example.picturegallery.domain.manager.FileManager
+import com.example.picturegallery.domain.manager.ImageManager
 import com.example.picturegallery.domain.manager.ResourceManager
 import dagger.Binds
 import dagger.Module
@@ -16,5 +18,9 @@ abstract class ManagerModule {
 
     @Binds
     @Singleton
-    abstract fun bindFileManager(fileManagerImpl: FileManagerImpl): FileManager
+    abstract fun bindImageManager(imageManager: ImageManagerImpl): ImageManager
+
+    @Binds
+    @Singleton
+    abstract fun bindFileManager(fileManager: FileManagerImpl) : FileManager
 }

@@ -11,4 +11,8 @@ interface ActionBarListener {
     fun setMenuProvider(menuProvider: MenuProvider)
     fun removeCustomMenuProvider(menuProvider: MenuProvider)
     fun invalidateCustomMenu()
+
+    fun setActionBarTitle(titleRes: Int)
+
+    fun setOnBackButtonClickListener(onClick: () -> Unit)
 }

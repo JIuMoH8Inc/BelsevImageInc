@@ -15,7 +15,6 @@ import com.example.picturegallery.feature.albums.viewmodel.AlbumViewModel
 import com.example.picturegallery.ui.dialog.AnswerDialog
 import com.example.picturegallery.ui.fragment.base.BaseFragment
 import com.example.picturegallery.utils.extensions.observe
-import com.example.picturegallery.utils.extensions.setLoadingState
 import com.faltenreich.skeletonlayout.applySkeleton
 import com.tapadoo.alerter.Alerter
 
@@ -24,10 +23,6 @@ class AlbumFragment: BaseFragment<AlbumViewModel>(R.layout.list_item_fragment) {
     private val binding by viewBinding(ListItemFragmentBinding::bind)
     private lateinit var albumAdapter: AlbumAdapter
 
-    private val skeleton by lazy {
-        binding.itemList.applySkeleton(R.layout.album_item, 4)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
@@ -35,7 +30,7 @@ class AlbumFragment: BaseFragment<AlbumViewModel>(R.layout.list_item_fragment) {
         viewModel.handleIntent(AlbumsFragmentIntent.OnLoadAlbums)
     }
 
-    private fun initViews() {
+    private fun initViews() = with(binding) {
         albumAdapter = AlbumAdapter(
             { albumId ->
                 viewModel.handleIntent(AlbumsFragmentIntent.OnAlbumClick(albumId))
@@ -43,8 +38,7 @@ class AlbumFragment: BaseFragment<AlbumViewModel>(R.layout.list_item_fragment) {
         ) { album ->
             viewModel.handleIntent(AlbumsFragmentIntent.OnMoreClick(album))
         }
-
-        binding.itemList.apply {
+        itemList.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = albumAdapter
         }
@@ -64,7 +58,7 @@ class AlbumFragment: BaseFragment<AlbumViewModel>(R.layout.list_item_fragment) {
     private fun setUiState(uiState: AlbumsFragmentUiState) = with(binding) {
         setActionBarTitle(uiState.toolbarTitle)
         albumAdapter.setNewAlbumList(uiState.albumList)
-        skeleton.setLoadingState(uiState.isLoading)
+        showSkeletonLoading(uiState.isLoading)
     }
 
     private fun handleAction(action: AlbumsFragmentAction) {
@@ -98,6 +92,8 @@ class AlbumFragment: BaseFragment<AlbumViewModel>(R.layout.list_item_fragment) {
             }
         }
     }
+
+    override fun initRecyclerSkeleton() = binding.itemList.applySkeleton(R.layout.album_item, 4)
 
     override fun getViewModelClass() = AlbumViewModel::class.java
 }

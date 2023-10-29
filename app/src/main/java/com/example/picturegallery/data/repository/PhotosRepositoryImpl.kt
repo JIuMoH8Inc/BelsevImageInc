@@ -5,6 +5,7 @@ import com.example.picturegallery.domain.model.dispatchers.AppDispatchers
 import com.example.picturegallery.domain.model.photos.PhotoResponse
 import com.example.picturegallery.domain.repository.PhotosRepository
 import kotlinx.coroutines.withContext
+import okhttp3.ResponseBody
 import javax.inject.Inject
 
 class PhotosRepositoryImpl @Inject constructor(
@@ -14,5 +15,10 @@ class PhotosRepositoryImpl @Inject constructor(
     override suspend fun getPhotos(skip: Int, take: Int): PhotoResponse =
         withContext(appDispatchers.io) {
             photosRemoteDataSource.getPhotos(skip, take)
+        }
+
+    override suspend fun getPhotoFile(id: Int): ResponseBody =
+        withContext(appDispatchers.io) {
+            photosRemoteDataSource.getPhotoFile(id)
         }
 }

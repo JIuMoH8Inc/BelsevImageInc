@@ -2,16 +2,20 @@ package com.example.picturegallery.feature.photos.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.picturegallery.R
 import com.example.picturegallery.databinding.ListItemFragmentBinding
 import com.example.picturegallery.feature.pagination.PaginationScrollListener
+import com.example.picturegallery.feature.photos.action.PhotoUiAction
 import com.example.picturegallery.feature.photos.adapter.adapter.PhotosAdapter
 import com.example.picturegallery.feature.photos.intent.PhotoFragmentIntent
 import com.example.picturegallery.feature.photos.uistate.PhotosUiState
+import com.example.picturegallery.feature.photos.viewmodel.PHOTO_ID_KEY
 import com.example.picturegallery.feature.photos.viewmodel.PhotosViewModel
 import com.example.picturegallery.ui.fragment.base.BaseFragment
 import com.example.picturegallery.utils.extensions.observe
@@ -23,11 +27,15 @@ class PhotosFragment: BaseFragment<PhotosViewModel>(R.layout.list_item_fragment)
     private val binding by viewBinding(ListItemFragmentBinding::bind)
 
     private val photoAdapter by lazy {
-        PhotosAdapter()
+        PhotosAdapter { id ->
+            viewModel.handleIntent(
+                PhotoFragmentIntent.OnPhotoClick(id)
+            )
+        }
     }
 
     private val skeleton by lazy {
-        binding.itemList.applySkeleton(R.layout.photo_item, 6)
+        binding.itemList.applySkeleton(R.layout.photo_item, 4)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,7 +45,8 @@ class PhotosFragment: BaseFragment<PhotosViewModel>(R.layout.list_item_fragment)
         viewModel.handleIntent(PhotoFragmentIntent.OnLoadPhotoList(true, 0))
     }
     private fun initViews() = with(binding) {
-        val gridLayoutManager = GridLayoutManager(requireContext(), 3)
+        setBackButtonVisibility(false)
+        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         itemList.apply {
             layoutManager = gridLayoutManager
             adapter = photoAdapter
@@ -51,6 +60,10 @@ class PhotosFragment: BaseFragment<PhotosViewModel>(R.layout.list_item_fragment)
     private fun observeFlow() {
         viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
             setUiState(uiState)
+        }
+
+        viewModel.uiAction.observe(viewLifecycleOwner) { uiAction ->
+            handleAction(uiAction)
         }
     }
 
@@ -87,6 +100,17 @@ class PhotosFragment: BaseFragment<PhotosViewModel>(R.layout.list_item_fragment)
 
                 }
             )
+        }
+    }
+
+    private fun handleAction(action: PhotoUiAction) {
+        when (action) {
+            is PhotoUiAction.OpenViewPhotoFragment -> {
+                findNavController().navigate(
+                    R.id.action_photosFragment_to_viewPhotoFragment,
+                    bundleOf(PHOTO_ID_KEY to action.id)
+                )
+            }
         }
     }
 

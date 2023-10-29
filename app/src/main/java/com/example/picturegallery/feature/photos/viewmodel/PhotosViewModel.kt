@@ -3,10 +3,12 @@ package com.example.picturegallery.feature.photos.viewmodel
 import androidx.lifecycle.viewModelScope
 import com.example.picturegallery.R
 import com.example.picturegallery.domain.useCase.GetPhotosUseCase
+import com.example.picturegallery.feature.photos.action.PhotoUiAction
 import com.example.picturegallery.feature.photos.intent.PhotoFragmentIntent
 import com.example.picturegallery.feature.photos.uistate.PhotosAdapterUiState
 import com.example.picturegallery.feature.photos.uistate.PhotosUiState
 import com.example.picturegallery.ui.fragment.base.BaseViewModel
+import com.example.picturegallery.utils.flow.SingleFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -25,12 +27,21 @@ class PhotosViewModel @Inject constructor(
     )
     val uiState = _uiState.asStateFlow()
 
+    private val _uiAction = SingleFlow<PhotoUiAction>()
+    val uiAction = _uiAction.asSharedFlow()
+
     private var tempPhotoList: MutableList<PhotosAdapterUiState> = mutableListOf()
 
     fun handleIntent(intent: PhotoFragmentIntent) {
         when (intent) {
             is PhotoFragmentIntent.OnLoadPhotoList -> {
                 load(intent.isInitLoading, intent.offset)
+            }
+
+            is PhotoFragmentIntent.OnPhotoClick -> {
+                _uiAction.tryEmit(
+                    PhotoUiAction.OpenViewPhotoFragment(intent.id)
+                )
             }
         }
     }
@@ -51,7 +62,7 @@ class PhotosViewModel @Inject constructor(
                             isLoading = false,
                             photoList = tempPhotoList.map { photo -> photo.copy() },
                             isNextPageLoading = false,
-                            isLastPage = photos.size < 42
+                            isLastPage = photos.size < LOADING_ITEMS_COUNT
                         )
                     }
                 }

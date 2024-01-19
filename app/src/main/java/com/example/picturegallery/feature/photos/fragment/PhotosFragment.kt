@@ -15,7 +15,6 @@ import com.example.picturegallery.feature.photos.uistate.PhotosUiState
 import com.example.picturegallery.feature.photos.viewmodel.PhotosViewModel
 import com.example.picturegallery.ui.fragment.base.BaseFragment
 import com.example.picturegallery.utils.extensions.observe
-import com.example.picturegallery.utils.extensions.setLoadingState
 import com.faltenreich.skeletonlayout.applySkeleton
 
 class PhotosFragment: BaseFragment<PhotosViewModel>(R.layout.list_item_fragment) {
@@ -24,10 +23,6 @@ class PhotosFragment: BaseFragment<PhotosViewModel>(R.layout.list_item_fragment)
 
     private val photoAdapter by lazy {
         PhotosAdapter()
-    }
-
-    private val skeleton by lazy {
-        binding.itemList.applySkeleton(R.layout.photo_item, 6)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,7 +52,7 @@ class PhotosFragment: BaseFragment<PhotosViewModel>(R.layout.list_item_fragment)
     private fun setUiState(uiState: PhotosUiState) = with(binding) {
         setActionBarTitle(uiState.toolbarTitle)
         photoAdapter.submitList(uiState.photoList)
-        skeleton.setLoadingState(uiState.isLoading)
+        showSkeletonLoading(uiState.isLoading)
 
         pagingLoadingItem.isVisible = uiState.isNextPageLoading
         pagingLoadBack.isVisible = uiState.isNextPageLoading
@@ -89,6 +84,8 @@ class PhotosFragment: BaseFragment<PhotosViewModel>(R.layout.list_item_fragment)
             )
         }
     }
+
+    override fun initRecyclerSkeleton() = binding.itemList.applySkeleton(R.layout.photo_item, 6)
 
     override fun getViewModelClass() = PhotosViewModel::class.java
 }

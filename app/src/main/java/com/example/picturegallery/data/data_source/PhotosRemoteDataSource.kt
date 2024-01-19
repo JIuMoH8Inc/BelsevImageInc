@@ -29,7 +29,7 @@ interface PhotosRemoteDataSource {
     suspend fun deletePhotos(@Body photoIdList: List<Int>)
 
     @GET("$photosUrl/getPhotoFile")
-    suspend fun downloadPhoto(@Query("photoId") id: Int)
+    suspend fun downloadPhoto(@Query("photoId") id: Int): ResponseBody
 
     @Multipart
     @POST("$photosUrl/uploadPhotos")
@@ -37,5 +37,4 @@ interface PhotosRemoteDataSource {
 
     @POST("$photosUrl/uploadPhoto")
     suspend fun uploadPhoto(@Body photo: UploadPhotoRequest)
-
 }

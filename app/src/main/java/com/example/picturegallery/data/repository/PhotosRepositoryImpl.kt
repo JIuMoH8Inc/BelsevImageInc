@@ -29,7 +29,7 @@ class PhotosRepositoryImpl @Inject constructor(
             photosRemoteDataSource.deletePhotos(photoIdList)
         }
 
-    override suspend fun downloadFile(id: Int) =
+    override suspend fun getPhotoFile(id: Int) =
         withContext(appDispatchers.io) {
             photosRemoteDataSource.downloadPhoto(id)
         }

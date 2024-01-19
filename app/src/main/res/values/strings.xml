@@ -7,6 +7,10 @@
     <string name="sign_in_text">Войти</string>
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
+    <string name="add_text">Добавить элемент</string>
+    <string name="created_pattern">Создано: %1$s</string>
+    <string name="created">Создано:</string>
+    <string name="unknown">неизвестно</string>
 
     <!-- Тексты ошибок -->
     <string name="no_internet_error">Нет подключения к интернету</string>

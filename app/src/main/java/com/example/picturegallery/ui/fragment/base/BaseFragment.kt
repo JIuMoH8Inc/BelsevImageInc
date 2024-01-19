@@ -1,26 +1,25 @@
 package com.example.picturegallery.ui.fragment.base
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.picturegallery.R
 import com.example.picturegallery.application.MyApp
 import com.example.picturegallery.ui.activity.AppActivity
 import com.example.picturegallery.ui.listener.ActionBarListener
 import com.example.picturegallery.utils.BannerManager
 import com.example.picturegallery.utils.extensions.observe
-
+import com.example.picturegallery.utils.extensions.setLoadingState
+import com.faltenreich.skeletonlayout.Skeleton
 abstract class BaseFragment<VM : BaseViewModel>(@LayoutRes layout: Int) : Fragment(layout) {
 
     lateinit var viewModel: VM
+
+    private val skeleton: Skeleton by lazy {
+        initRecyclerSkeleton()
+    }
 
     abstract fun getViewModelClass(): Class<VM>
     private lateinit var listener: ActionBarListener
@@ -43,11 +42,11 @@ abstract class BaseFragment<VM : BaseViewModel>(@LayoutRes layout: Int) : Fragme
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeMessageLiveData()
+        observeMessageFlow()
     }
 
 
-    private fun observeMessageLiveData() {
+    private fun observeMessageFlow() {
         viewModel.baseUiAction.observe(viewLifecycleOwner) { action ->
             handleAction(action)
         }
@@ -78,5 +77,13 @@ abstract class BaseFragment<VM : BaseViewModel>(@LayoutRes layout: Int) : Fragme
                 )
             }
         }
+    }
+    
+    protected open fun initRecyclerSkeleton(): Skeleton {
+        TODO("stub for overriding")
+    }
+
+    protected fun showSkeletonLoading(isLoading: Boolean) {
+        skeleton.setLoadingState(isLoading)
     }
 }

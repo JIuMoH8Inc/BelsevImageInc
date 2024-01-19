@@ -6,27 +6,22 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.picturegallery.R
-import com.example.picturegallery.databinding.AlbumPhotoFragmentBinding
+import com.example.picturegallery.databinding.ListItemFragmentBinding
 import com.example.picturegallery.feature.albums.action.AlbumsFragmentAction
-import com.example.picturegallery.feature.albums.adapter.AlbumAdapter
+import com.example.picturegallery.feature.albums.adapter.adapter.AlbumAdapter
 import com.example.picturegallery.feature.albums.intent.AlbumsFragmentIntent
 import com.example.picturegallery.feature.albums.uistate.AlbumsFragmentUiState
 import com.example.picturegallery.feature.albums.viewmodel.AlbumViewModel
 import com.example.picturegallery.ui.dialog.AnswerDialog
 import com.example.picturegallery.ui.fragment.base.BaseFragment
 import com.example.picturegallery.utils.extensions.observe
-import com.example.picturegallery.utils.extensions.setLoadingState
 import com.faltenreich.skeletonlayout.applySkeleton
 import com.tapadoo.alerter.Alerter
 
-class AlbumFragment: BaseFragment<AlbumViewModel>(R.layout.album_photo_fragment) {
+class AlbumFragment: BaseFragment<AlbumViewModel>(R.layout.list_item_fragment) {
 
-    private val binding by viewBinding(AlbumPhotoFragmentBinding::bind)
+    private val binding by viewBinding(ListItemFragmentBinding::bind)
     private lateinit var albumAdapter: AlbumAdapter
-
-    private val skeleton by lazy {
-        binding.itemList.applySkeleton(R.layout.album_item, 4)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,7 +30,7 @@ class AlbumFragment: BaseFragment<AlbumViewModel>(R.layout.album_photo_fragment)
         viewModel.handleIntent(AlbumsFragmentIntent.OnLoadAlbums)
     }
 
-    private fun initViews() {
+    private fun initViews() = with(binding) {
         albumAdapter = AlbumAdapter(
             { albumId ->
                 viewModel.handleIntent(AlbumsFragmentIntent.OnAlbumClick(albumId))
@@ -43,8 +38,7 @@ class AlbumFragment: BaseFragment<AlbumViewModel>(R.layout.album_photo_fragment)
         ) { album ->
             viewModel.handleIntent(AlbumsFragmentIntent.OnMoreClick(album))
         }
-
-        binding.itemList.apply {
+        itemList.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = albumAdapter
         }
@@ -64,7 +58,7 @@ class AlbumFragment: BaseFragment<AlbumViewModel>(R.layout.album_photo_fragment)
     private fun setUiState(uiState: AlbumsFragmentUiState) = with(binding) {
         setActionBarTitle(uiState.toolbarTitle)
         albumAdapter.setNewAlbumList(uiState.albumList)
-        skeleton.setLoadingState(uiState.isLoading)
+        showSkeletonLoading(uiState.isLoading)
     }
 
     private fun handleAction(action: AlbumsFragmentAction) {
@@ -98,6 +92,8 @@ class AlbumFragment: BaseFragment<AlbumViewModel>(R.layout.album_photo_fragment)
             }
         }
     }
+
+    override fun initRecyclerSkeleton() = binding.itemList.applySkeleton(R.layout.album_item, 4)
 
     override fun getViewModelClass() = AlbumViewModel::class.java
 }

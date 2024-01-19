@@ -11,8 +11,18 @@ class PhotosRepositoryImpl @Inject constructor(
     private val photosRemoteDataSource: PhotosRemoteDataSource,
     private val appDispatchers: AppDispatchers
 ) : PhotosRepository {
-    override suspend fun getPhotos(): PhotoResponse =
+    override suspend fun getPhotos(skip: Int, take: Int): PhotoResponse =
         withContext(appDispatchers.io) {
-            photosRemoteDataSource.getPhotos()
+            photosRemoteDataSource.getPhotos(skip, take)
+        }
+
+    override suspend fun deletePhotos(photoIdList: List<Int>) =
+        withContext(appDispatchers.io) {
+            photosRemoteDataSource.deletePhotos(photoIdList)
+        }
+
+    override suspend fun downloadFile(id: Int) =
+        withContext(appDispatchers.io) {
+            photosRemoteDataSource.downloadPhoto(id)
         }
 }

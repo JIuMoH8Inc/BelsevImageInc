@@ -2,6 +2,7 @@ package com.example.picturegallery.feature.photos.adapter.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.picturegallery.databinding.PhotoItemBinding
 import com.example.picturegallery.feature.photos.adapter.viewholder.PhotosViewHolder
@@ -9,11 +10,13 @@ import com.example.picturegallery.feature.photos.uistate.PhotosAdapterUiState
 
 class PhotosAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var photoList: List<PhotosAdapterUiState> = emptyList()
+    private var photoList: MutableList<PhotosAdapterUiState> = mutableListOf()
 
-    fun submitList(photos: List<PhotosAdapterUiState>) {
-        photoList = photos
-        notifyDataSetChanged()
+    fun submitList(photos: List<PhotosAdapterUiState>) = with(photoList) {
+        DiffUtil.calculateDiff(PhotoDiffUtil(this, photos)).run {
+            addAll(photos)
+            dispatchUpdatesTo(this@PhotosAdapter)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

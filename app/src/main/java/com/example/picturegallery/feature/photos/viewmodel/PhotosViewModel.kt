@@ -51,7 +51,7 @@ class PhotosViewModel @Inject constructor(
                             isLoading = false,
                             photoList = tempPhotoList.map { photo -> photo.copy() },
                             isNextPageLoading = false,
-                            isLastPage = photos.size < 42
+                            isLastPage = photos.size < LOADING_ITEMS_COUNT
                         )
                     }
                 }

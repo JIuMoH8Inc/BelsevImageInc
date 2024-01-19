@@ -15,7 +15,7 @@ data class CoverPhoto(
     val latitude: Float? = 0f,
     val longitude: Float? = 0f,
     val thumbnailWidth: Int = 0,
-    val creationTime: String = "",
+    val creationTime: Date? = Date(),
     val ownerName: String? = "",
     val ownerId: String = "",
     val fileSize: Int = 0,

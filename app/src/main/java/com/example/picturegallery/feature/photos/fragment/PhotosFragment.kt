@@ -37,7 +37,7 @@ class PhotosFragment: BaseFragment<PhotosViewModel>(R.layout.list_item_fragment)
         viewModel.handleIntent(PhotoFragmentIntent.OnLoadPhotoList(true, 0))
     }
     private fun initViews() = with(binding) {
-        val gridLayoutManager = GridLayoutManager(requireContext(), 3)
+        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         itemList.apply {
             layoutManager = gridLayoutManager
             adapter = photoAdapter

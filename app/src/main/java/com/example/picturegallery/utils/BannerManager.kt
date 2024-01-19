@@ -22,12 +22,12 @@ object BannerManager {
 
     fun showSuccessBanner(
         activity: Activity,
-        @StringRes title: Int = R.string.success,
+        @StringRes title: Int = R.string.succuss_text,
         message: String
     ) = Alerter.create(activity)
         .enableIconPulse(true)
         .setBackgroundColorRes(R.color.green)
-        .setIcon(R.drawable.ic_check_success)
+        .setIcon(R.drawable.ic_check_done)
         .setTitle(title)
         .setText(message)
         .show()

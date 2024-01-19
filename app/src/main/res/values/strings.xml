@@ -3,6 +3,7 @@
 
     <string name="app_name">Belsev image</string>
     <string name="error_text">Ошибка</string>
+    <string name="succuss_text">Успех</string>
     <string name="try_again_later">Повторите позднее</string>
     <string name="sign_in_text">Войти</string>
     <string name="login">Логин</string>
@@ -74,4 +75,8 @@
     <string name="add_to_new_album">Создать новый альбом</string>
     <string name="add_to_exist_album">Добавить в уже существующий</string>
     <string name="add_to_album">В альбом</string>
+    <string name="view_photo">Просмотр фото</string>
+    <string name="view_photo_load_error_header">Не удалось загрузить фото</string>
+    <string name="upload_photo_error">Не удалось загрузить фото.\nПопробуйте поздне</string>
+    <string name="upload_photo_success">Фотографии успешно загружены в галерею.\nБыло загружено %1$s фото</string>
 </resources>

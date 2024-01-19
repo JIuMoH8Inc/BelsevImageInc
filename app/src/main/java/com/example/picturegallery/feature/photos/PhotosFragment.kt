@@ -109,7 +109,11 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(R.layout.list_item_fragment
         }
 
         fabAdd.setOnClickListener {
-
+            viewModel.handleIntent(
+                PhotoFragmentIntent.OnAddPhotoButtonClick(
+                    requireActivity().activityResultRegistry
+                )
+            )
         }
 
         addToAlbum.setOnClickListener {

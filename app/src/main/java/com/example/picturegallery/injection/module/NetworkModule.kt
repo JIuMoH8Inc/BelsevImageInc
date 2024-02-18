@@ -1,12 +1,11 @@
 package com.example.picturegallery.injection.module
 
-import android.content.Context
 import com.example.picturegallery.data.data_source.AlbumRemoteDataSource
 import com.example.picturegallery.data.data_source.PhotosRemoteDataSource
-import com.example.picturegallery.data.data_source.TokenDao
 import com.example.picturegallery.data.interceptor.NetworkInterceptor
+import com.example.picturegallery.domain.manager.CryptoManager
 import com.example.picturegallery.domain.model.dispatchers.AppDispatchers
-import com.example.picturegallery.injection.ForApplication
+import com.example.picturegallery.utils.manager.AppPreferences
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -120,15 +119,9 @@ class NetworkModule {
     @Provides
     @Singleton
     @Named("token")
-   fun provideToken(db: TokenDao): String =
-        runBlocking(Dispatchers.IO) {
-            db.getToken()?.token ?: ""
-    }
+    fun provideToken(prefs: AppPreferences, cryptoManager: CryptoManager) =
+        cryptoManager.decrypt(CryptoManager.Key.TOKEN, prefs.token) ?: ""
 
-    @Provides
-    @Singleton
-    fun provideLocalDbTest(@ForApplication context: Context): TokenDao =
-        TokenDao.create(context)
 
     @Provides
     @Singleton

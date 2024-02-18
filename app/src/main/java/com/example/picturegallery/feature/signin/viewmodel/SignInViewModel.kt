@@ -1,25 +1,24 @@
 package com.example.picturegallery.feature.signin.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.example.picturegallery.data.data_source.TokenDao
 import com.example.picturegallery.data.repository.UserRepositoryImpl
-import com.example.picturegallery.domain.model.room.entity.Token
+import com.example.picturegallery.domain.manager.CryptoManager
 import com.example.picturegallery.feature.signin.action.SignInAction
 import com.example.picturegallery.feature.signin.intent.SignInIntent
 import com.example.picturegallery.feature.signin.uistate.SignInUiState
 import com.example.picturegallery.ui.fragment.base.BaseViewModel
 import com.example.picturegallery.utils.flow.SingleFlow
-import kotlinx.coroutines.Dispatchers
+import com.example.picturegallery.utils.manager.AppPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SignInViewModel @Inject constructor(
     private val userRepositoryImpl: UserRepositoryImpl,
-    private val tokenDao: TokenDao
+    private val prefs: AppPreferences,
+    private val cryptoManager: CryptoManager
 ) : BaseViewModel() {
 
     //"test2", "test2@Asd.s"
@@ -58,14 +57,7 @@ class SignInViewModel @Inject constructor(
                             isLoading = false
                         )
                     }
-                    withContext(Dispatchers.IO) {
-                        tokenDao.getToken()
-                            ?.let {//добавить шифрование токена и написать обработку ошибок от сервера
-                                tokenDao.updateToken(Token(token))
-                            } ?: run {
-                            tokenDao.saveToken(Token(token))
-                        }
-                    }
+                    prefs.token = cryptoManager.encrypt(CryptoManager.Key.TOKEN, token) ?: ""
                 }
                 .onFailure {
                     parseError(it)

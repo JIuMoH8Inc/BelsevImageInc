@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace 'com.example.picturegallery'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.picturegallery"
@@ -41,17 +41,17 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.android.material:material:1.11.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    implementation 'com.google.dagger:dagger:2.45'
-    kapt "com.google.dagger:dagger-compiler:2.45"
+    implementation 'com.google.dagger:dagger:2.50'
+    kapt "com.google.dagger:dagger-compiler:2.50"
 
     implementation 'com.squareup.okhttp3:okhttp-android-support:3.11.0'
     implementation 'com.squareup.okhttp3:okhttp-urlconnection:4.10.0'
@@ -62,27 +62,18 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
     implementation 'com.squareup.retrofit2:retrofit-mock:2.9.0'
 
-    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.10'
 
-    implementation("androidx.room:room-runtime:2.5.2")
-    annotationProcessor("androidx.room:room-compiler:2.5.2")
-
-    // To use Kotlin annotation processing tool (kapt)
-    // To use Kotlin Symbol Processing (KSP)
-    ksp("androidx.room:room-compiler:2.5.2")
-
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:2.5.2")
-
-    def nav_version = "2.5.1"
+    def nav_version = "2.7.7"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
-    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
 
     implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.8")
 
     implementation 'com.github.tapadoo:alerter:7.2.4'
 
     implementation 'com.faltenreich:skeletonlayout:5.0.0'
+    implementation "androidx.preference:preference-ktx:1.2.1"
 }

@@ -1,12 +1,11 @@
 package com.example.picturegallery.injection.module
 
-import android.content.Context
 import com.example.picturegallery.data.data_source.AlbumRemoteDataSource
 import com.example.picturegallery.data.data_source.PhotosRemoteDataSource
-import com.example.picturegallery.data.data_source.TokenDao
 import com.example.picturegallery.data.interceptor.NetworkInterceptor
+import com.example.picturegallery.domain.manager.CryptoManager
 import com.example.picturegallery.domain.model.dispatchers.AppDispatchers
-import com.example.picturegallery.injection.ForApplication
+import com.example.picturegallery.utils.manager.AppPreferences
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -57,7 +56,7 @@ class NetworkModule {
             )
             .addInterceptor { chain ->
                 chain.proceed(
-                    chain.request().newBuilder().addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ4NDUzODVmLWE5MzAtNDk1Ny1iYjYxLWIyM2ZlNzgzMmU1NCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ0ZXN0MiIsIkFzcE5ldC5JZGVudGl0eS5TZWN1cml0eVN0YW1wIjoiNkc2SFZBTkhXVVpOVlk1NURaNTNHWVpTWlYySVRYQjYiLCJleHAiOjE3MTA4NDQyNTQsImlzcyI6InBob3RvLmJlbHNldi5zdSJ9.c1QzYMKz7pQlSpeKaa6azzafuOdw5mLSYKoOQd7harQ").build()
+                    chain.request().newBuilder().addHeader("Authorization", "Bearer $token").build()
                 )
             }
             .protocols(listOf(Protocol.HTTP_1_1))
@@ -120,15 +119,9 @@ class NetworkModule {
     @Provides
     @Singleton
     @Named("token")
-   fun provideToken(db: TokenDao): String =
-        runBlocking(Dispatchers.IO) {
-            db.getToken()?.token ?: ""
-    }
+    fun provideToken(prefs: AppPreferences, cryptoManager: CryptoManager) =
+        cryptoManager.decrypt(CryptoManager.Key.TOKEN, prefs.token) ?: ""
 
-    @Provides
-    @Singleton
-    fun provideLocalDbTest(@ForApplication context: Context): TokenDao =
-        TokenDao.create(context)
 
     @Provides
     @Singleton

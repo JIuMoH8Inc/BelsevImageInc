@@ -11,14 +11,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.picturegallery.R
 import com.example.picturegallery.databinding.ListItemFragmentBinding
 import com.example.picturegallery.feature.pagination.PaginationScrollListener
-import com.example.picturegallery.feature.photos.adapter.adapter.PhotosAdapter
+import com.example.picturegallery.feature.photos.adapter.PhotosAdapter
 import com.example.picturegallery.feature.photos.choose_add_photo_type.AddPhotoAlbumTypeBottomSheet
 import com.example.picturegallery.feature.photo_view.ViewPhotoFragment
+import com.example.picturegallery.feature.photos.adapter.PhotosViewHolder
 import com.example.picturegallery.ui.dialog.AnswerDialog
 import com.example.picturegallery.ui.fragment.base.BaseFragment
 import com.example.picturegallery.utils.extensions.observe
@@ -99,7 +99,7 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(R.layout.list_item_fragment
     override fun onPause() {
         super.onPause()
         removeMenuProvider(menuProvider)
-        PhotosAdapter.isSelectionMode = false
+        PhotosViewHolder.isSelectionMode = false
     }
 
     private fun initViews() = with(binding) {
@@ -132,22 +132,8 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(R.layout.list_item_fragment
     private fun setUiState(uiState: PhotosUiState) = with(binding) {
         setActionBarTitle(uiState.toolbarTitle)
 
-        with(photoAdapter) {
-            registerAdapterDataObserver(
-                object : RecyclerView.AdapterDataObserver() {
-                    override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                        if (!uiState.isLastPage)
-                            itemList.smoothScrollToPosition(positionStart)
-                    }
-                }
-            )
-        }
-
         setMenuVisible(uiState.isSelectionMode && !uiState.isAddToAlbum)
 
-        showSkeletonLoading(uiState.isLoading)
-
-        pagingLoadingItem.isVisible = uiState.isNextPageLoading
         pagingLoadBack.isVisible = uiState.isNextPageLoading
 
         itemList.apply {
@@ -160,9 +146,11 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(R.layout.list_item_fragment
                         )
                     }
 
-                    override fun isLastPage(): Boolean = uiState.isLastPage
+                    override val isLastPage: Boolean
+                        get() = uiState.isLastPage
 
-                    override fun isLoading(): Boolean = uiState.isNextPageLoading
+                    override val isLoading: Boolean
+                        get() = uiState.isNextPageLoading
 
                 }
             )
@@ -170,7 +158,7 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(R.layout.list_item_fragment
 
         fabAdd.isVisible = !uiState.isAddToAlbum
         addToAlbum.isVisible = uiState.isAddToAlbum
-        PhotosAdapter.isSelectionMode = uiState.isAddToAlbum
+        PhotosViewHolder.isSelectionMode = uiState.isAddToAlbum
     }
 
     private fun handleAction(action: PhotosUiAction) {
@@ -180,7 +168,7 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(R.layout.list_item_fragment
             }
 
             is PhotosUiAction.SelectPhotos -> {
-                PhotosAdapter.isSelectionMode = action.isSelectionMode
+                PhotosViewHolder.isSelectionMode = action.isSelectionMode
                 photoAdapter.submitList(action.list)
                 setMenuVisible(action.isSelectionMode && !action.isAddToAlbum)
                 setActionBarTitle(action.toolbarTitle)
@@ -206,6 +194,10 @@ class PhotosFragment : BaseFragment<PhotosViewModel>(R.layout.list_item_fragment
 
             is PhotosUiAction.SetPhotos -> {
                 photoAdapter.submitList(action.photos)
+            }
+
+            is PhotosUiAction.ShowSkeleton -> {
+                showSkeletonLoading(action.isShow)
             }
         }
     }

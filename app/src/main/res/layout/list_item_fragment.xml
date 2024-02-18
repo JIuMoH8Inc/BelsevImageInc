@@ -53,16 +53,15 @@
         android:layout_height="match_parent"
         android:id="@+id/paging_load_back"
         android:visibility="gone"
-        android:background="@color/black_background_loading"/>
+        android:background="@color/transparent">
 
-    <ProgressBar
-        android:layout_width="@dimen/progress_bar_loading_size"
-        android:layout_height="@dimen/progress_bar_loading_size"
-        android:id="@+id/paging_loading_item"
-        android:layout_gravity="center|bottom"
-        android:visibility="gone"
-        android:indeterminateTint="@color/light_blue"
-        android:layout_marginBottom="@dimen/horizontal_margin"/>
+        <ProgressBar
+            android:layout_width="@dimen/progress_bar_loading_size"
+            android:layout_height="@dimen/progress_bar_loading_size"
+            android:layout_gravity="center|bottom"
+            android:indeterminateTint="@color/light_blue"
+            android:layout_marginBottom="@dimen/horizontal_margin"/>
+    </FrameLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

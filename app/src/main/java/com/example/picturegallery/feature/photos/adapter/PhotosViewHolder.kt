@@ -1,10 +1,9 @@
-package com.example.picturegallery.feature.photos.adapter.viewholder
+package com.example.picturegallery.feature.photos.adapter
 
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.picturegallery.databinding.PhotoItemBinding
-import com.example.picturegallery.feature.photos.adapter.adapter.PhotosAdapter
 import com.example.picturegallery.feature.photos.PhotosAdapterUiState
 
 class PhotosViewHolder(
@@ -13,16 +12,20 @@ class PhotosViewHolder(
     private val onPhotoSelect: (Int, Boolean) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    companion object {
+        var isSelectionMode = false
+    }
+
     init {
         with(binding.root) {
             setOnClickListener {
-                if (PhotosAdapter.isSelectionMode) {
+                if (isSelectionMode) {
                     onPhotoSelect(selectedPhoto.id, selectedPhoto.isSelected)
                 } else onPhotoClick(selectedPhoto.id)
             }
 
             setOnLongClickListener {
-                if (!PhotosAdapter.isSelectionMode) {
+                if (!isSelectionMode) {
                     onPhotoSelect(selectedPhoto.id, selectedPhoto.isSelected)
                 }
                 true

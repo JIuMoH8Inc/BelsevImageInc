@@ -19,4 +19,5 @@ sealed interface PhotosUiAction {
 
     data class SetPhotos(val photos: List<PhotosAdapterUiState>) : PhotosUiAction
 
+    data class ShowSkeleton(val isShow: Boolean) : PhotosUiAction
 }

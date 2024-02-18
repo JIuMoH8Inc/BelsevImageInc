@@ -11,7 +11,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.picturegallery.R
 import com.example.picturegallery.databinding.CreateAlbumLayoutBinding
 import com.example.picturegallery.feature.album_content.AlbumContentFragment
-import com.example.picturegallery.feature.photos.adapter.adapter.PhotosAdapter
+import com.example.picturegallery.feature.photos.adapter.PhotosAdapter
+import com.example.picturegallery.feature.photos.adapter.PhotosViewHolder
 import com.example.picturegallery.ui.fragment.base.BaseFragment
 import com.example.picturegallery.utils.extensions.observe
 import com.example.picturegallery.utils.navigation.Route
@@ -44,11 +45,11 @@ class CreateAlbumFragment : BaseFragment<CreateAlbumViewModel>(R.layout.create_a
 
     override fun onPause() {
         super.onPause()
-        PhotosAdapter.isSelectionMode = false
+        PhotosViewHolder.isSelectionMode = false
     }
 
     private fun initViews() = with(binding) {
-        PhotosAdapter.isSelectionMode = true
+        PhotosViewHolder.isSelectionMode = true
         photoList.adapter = photosAdapter
         showBackButton(true)
         createAlbum.setOnClickListener {

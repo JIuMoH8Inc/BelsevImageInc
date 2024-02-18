@@ -2,7 +2,6 @@ package com.example.picturegallery.injection.module
 
 import com.example.picturegallery.data.data_source.UserRemoteDataSource
 import com.example.picturegallery.data.interceptor.LoginInterceptor
-import com.example.picturegallery.data.interceptor.NetworkInterceptor
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides

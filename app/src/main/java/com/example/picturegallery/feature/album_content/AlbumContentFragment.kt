@@ -13,7 +13,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.picturegallery.R
 import com.example.picturegallery.databinding.ListItemFragmentBinding
 import com.example.picturegallery.feature.photos.PhotosFragment
-import com.example.picturegallery.feature.photos.adapter.adapter.PhotosAdapter
+import com.example.picturegallery.feature.photos.adapter.PhotosAdapter
+import com.example.picturegallery.feature.photos.adapter.PhotosViewHolder
 import com.example.picturegallery.ui.dialog.AnswerDialog
 import com.example.picturegallery.ui.fragment.base.BaseFragment
 import com.example.picturegallery.utils.extensions.observe
@@ -115,7 +116,7 @@ class AlbumContentFragment : BaseFragment<AlbumContentViewModel>(R.layout.list_i
     private fun handleAction(action: AlbumContentUiAction) {
         when (action) {
             is AlbumContentUiAction.SelectPhotos -> {
-                PhotosAdapter.isSelectionMode = action.isSelectionMode
+                PhotosViewHolder.isSelectionMode = action.isSelectionMode
                 photoAdapter.submitList(action.list)
                 setMenuVisible(action.isSelectionMode)
                 setActionBarTitle(action.toolbarTitle)

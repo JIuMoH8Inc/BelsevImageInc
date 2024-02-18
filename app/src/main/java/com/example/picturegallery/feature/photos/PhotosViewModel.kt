@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val LOADING_ITEMS_COUNT = 42
+private const val LOADING_ITEMS_COUNT = 35
 
 class PhotosViewModel @Inject constructor(
     private val getPhotosUseCase: GetPhotoUiUseCase,
@@ -45,6 +45,8 @@ class PhotosViewModel @Inject constructor(
     private var tempPhotoList: MutableList<PhotosAdapterUiState> = mutableListOf()
     private var selectedPhotosId = mutableListOf<Int>()
     private var isAddToAlbumMode = false
+    private var totalCount = 0
+
     private val isSelectionMode: Boolean
         get() = selectedPhotosId.isNotEmpty()
 
@@ -149,26 +151,37 @@ class PhotosViewModel @Inject constructor(
 
     //TODO придумать как измениять список без .map { copy() } для пагинации
     private fun load(isInitLoading: Boolean, offset: Int) {
-        initLoad(isInitLoading)
+        if (isInitLoading) tempPhotoList.clear()
+
+        val pageSize =
+            if (tempPhotoList.size + LOADING_ITEMS_COUNT > totalCount && !isInitLoading) {
+                totalCount - tempPhotoList.size
+            } else LOADING_ITEMS_COUNT
+
         viewModelScope.launchRequest(
             request = {
-                photosRepository.getPhotos(offset, LOADING_ITEMS_COUNT)
+                photosRepository.getPhotos(offset, pageSize)
             },
             onLoading = { isLoading ->
+                if (isInitLoading) {
+                    _uiAction.tryEmit(
+                        PhotosUiAction.ShowSkeleton(isLoading)
+                    )
+                }
                 _uiState.update {
                     it.copy(
-                        isLoading = isLoading
+                        isNextPageLoading = isLoading && !isInitLoading
                     )
                 }
             },
-            onSuccess = { photos ->
-                val photosUi = getPhotosUseCase(photos.list)
+            onSuccess = { (totalCount, list) ->
+                val photosUi = getPhotosUseCase(list)
                 tempPhotoList.addAll(photosUi)
+                this.totalCount = totalCount
                 _uiState.update {
                     it.copy(
                         isLoading = false,
-                        isNextPageLoading = false,
-                        isLastPage = photosUi.size <= LOADING_ITEMS_COUNT
+                        isLastPage = photosUi.size < LOADING_ITEMS_COUNT
                     )
                 }
                 _uiAction.tryEmit(
@@ -178,8 +191,7 @@ class PhotosViewModel @Inject constructor(
             onError = {
                 _uiState.update {
                     it.copy(
-                        isError = true,
-                        isNextPageLoading = false
+                        isError = true
                     )
                 }
             }
@@ -248,17 +260,5 @@ class PhotosViewModel @Inject constructor(
             )
         )
         load(true, 0)
-    }
-
-    private fun initLoad(isInitLoading: Boolean) {
-        tempPhotoList.clear()
-
-        _uiState.update {
-            it.copy(
-                isError = false,
-                isEmpty = false,
-                isNextPageLoading = !isInitLoading
-            )
-        }
     }
 }

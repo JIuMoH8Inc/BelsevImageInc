@@ -1,12 +1,12 @@
 package com.example.picturegallery.feature.signin
 
 import androidx.lifecycle.viewModelScope
-import com.example.picturegallery.data.data_source.TokenDao
-import com.example.picturegallery.domain.model.room.entity.Token
+import com.example.picturegallery.domain.manager.CryptoManager
 import com.example.picturegallery.domain.repository.UserRepository
 import com.example.picturegallery.ui.fragment.base.BaseViewModel
 import com.example.picturegallery.utils.extensions.launchRequest
 import com.example.picturegallery.utils.flow.SingleFlow
+import com.example.picturegallery.utils.manager.AppPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -14,7 +14,8 @@ import javax.inject.Inject
 
 class SignInViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val tokenDao: TokenDao
+    private val prefs: AppPreferences,
+    private val cryptoManager: CryptoManager
 ) : BaseViewModel() {
 
     //"test2", "test2@Asd.s"
@@ -53,12 +54,7 @@ class SignInViewModel @Inject constructor(
         },
         onSuccess = { token ->
             _uiAction.tryEmit(SignInAction.OpenAlbumFragment)
-            tokenDao.getToken()
-                ?.let {//добавить шифрование токена и написать обработку ошибок от сервера
-                    tokenDao.updateToken(Token(token))
-                } ?: run {
-                tokenDao.saveToken(Token(token))
-            }
+            prefs.token = cryptoManager.encrypt(CryptoManager.Key.TOKEN, token) ?: ""
         }
     )
 

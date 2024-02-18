@@ -41,7 +41,11 @@ class ZoomedImageView : AppCompatImageView, View.OnTouchListener,
         sharedConstructing(context)
     }
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context!!, attrs, defStyleAttr)
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context!!,
+        attrs,
+        defStyleAttr
+    )
 
     private fun sharedConstructing(context: Context) {
         super.setClickable(true)
@@ -73,19 +77,24 @@ class ZoomedImageView : AppCompatImageView, View.OnTouchListener,
                 mScaleFactor = mMinScale / prevScale
             }
             if (origWidth * mSaveScale <= viewWidth
-                || origHeight * mSaveScale <= viewHeight) {
-                mMatrix!!.postScale(mScaleFactor, mScaleFactor, viewWidth / 2.toFloat(),
-                    viewHeight / 2.toFloat())
+                || origHeight * mSaveScale <= viewHeight
+            ) {
+                mMatrix!!.postScale(
+                    mScaleFactor, mScaleFactor, viewWidth / 2.toFloat(),
+                    viewHeight / 2.toFloat()
+                )
             } else {
-                mMatrix!!.postScale(mScaleFactor, mScaleFactor,
-                    detector.focusX, detector.focusY)
+                mMatrix!!.postScale(
+                    mScaleFactor, mScaleFactor,
+                    detector.focusX, detector.focusY
+                )
             }
             fixTranslation()
             return true
         }
     }
 
-    private  fun fitToScreen() {
+    private fun fitToScreen() {
         mSaveScale = 1f
         val scale: Float
         val drawable = drawable
@@ -112,8 +121,10 @@ class ZoomedImageView : AppCompatImageView, View.OnTouchListener,
 
     fun fixTranslation() {
         mMatrix!!.getValues(mMatrixValues) //put matrix values into a float array so we can analyze
-        val transX = mMatrixValues!![Matrix.MTRANS_X] //get the most recent translation in x direction
-        val transY = mMatrixValues!![Matrix.MTRANS_Y] //get the most recent translation in y direction
+        val transX =
+            mMatrixValues!![Matrix.MTRANS_X] //get the most recent translation in x direction
+        val transY =
+            mMatrixValues!![Matrix.MTRANS_Y] //get the most recent translation in y direction
         val fixTransX = getFixTranslation(transX, viewWidth.toFloat(), origWidth * mSaveScale)
         val fixTransY = getFixTranslation(transY, viewHeight.toFloat(), origHeight * mSaveScale)
         if (fixTransX != 0f || fixTransY != 0f) mMatrix!!.postTranslate(fixTransX, fixTransY)
@@ -168,6 +179,7 @@ class ZoomedImageView : AppCompatImageView, View.OnTouchListener,
                 mStart.set(mLast)
                 mode = DRAG
             }
+
             MotionEvent.ACTION_MOVE -> if (mode == DRAG) {
                 val dx = currentPoint.x - mLast.x
                 val dy = currentPoint.y - mLast.y
@@ -177,6 +189,7 @@ class ZoomedImageView : AppCompatImageView, View.OnTouchListener,
                 fixTranslation()
                 mLast[currentPoint.x] = currentPoint.y
             }
+
             MotionEvent.ACTION_POINTER_UP -> mode = NONE
         }
         imageMatrix = mMatrix
@@ -195,12 +208,23 @@ class ZoomedImageView : AppCompatImageView, View.OnTouchListener,
         return false
     }
 
-    override fun onScroll(motionEvent: MotionEvent, motionEvent1: MotionEvent, v: Float, v1: Float): Boolean {
+    override fun onScroll(
+        motionEvent: MotionEvent?,
+        motionEvent1: MotionEvent,
+        v: Float,
+        v1: Float
+    ): Boolean {
         return false
     }
 
     override fun onLongPress(motionEvent: MotionEvent) {}
-    override fun onFling(motionEvent: MotionEvent, motionEvent1: MotionEvent, v: Float, v1: Float): Boolean {
+
+    override fun onFling(
+        motionEvent: MotionEvent?,
+        motionEvent1: MotionEvent,
+        v: Float,
+        v1: Float
+    ): Boolean {
         return false
     }
 

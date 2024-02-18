@@ -8,7 +8,7 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.picturegallery.R
 import com.example.picturegallery.databinding.ChooseCoverPhotoLayoutBinding
-import com.example.picturegallery.feature.photos.adapter.adapter.PhotosAdapter
+import com.example.picturegallery.feature.photos.adapter.PhotosAdapter
 import com.example.picturegallery.ui.fragment.base.BaseBottomSheetFragment
 import com.example.picturegallery.utils.extensions.observe
 import com.example.picturegallery.utils.navigation.Route

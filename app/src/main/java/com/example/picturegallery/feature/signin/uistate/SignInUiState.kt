@@ -1,6 +1,6 @@
 package com.example.picturegallery.feature.signin.uistate
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import com.example.picturegallery.R
 
 data class SignInUiState(

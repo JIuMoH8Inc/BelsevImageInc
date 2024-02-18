@@ -43,8 +43,8 @@ class AnswerDialog(private val data: DialogData) : DialogFragment(R.layout.answe
         val answer: String = "",
         val positiveButtonText: String = "",
         val negativeButtonText: String = "",
-        val positiveButtonClick: () -> Unit,
-        val negativeButtonClick: () -> Unit
+        val positiveButtonClick: () -> Unit = {},
+        val negativeButtonClick: () -> Unit = {}
     )
 
 }

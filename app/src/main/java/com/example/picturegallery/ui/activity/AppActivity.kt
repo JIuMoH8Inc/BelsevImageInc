@@ -2,6 +2,7 @@ package com.example.picturegallery.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.picturegallery.R
@@ -53,5 +54,17 @@ class AppActivity : AppCompatActivity(), ActionBarListener {
 
     override fun showBackButton(isShow: Boolean) {
         supportActionBar?.setDisplayHomeAsUpEnabled(isShow)
+    }
+
+    override fun setMenuProvider(menuProvider: MenuProvider) {
+        addMenuProvider(menuProvider)
+    }
+
+    override fun removeCustomMenuProvider(menuProvider: MenuProvider) {
+        removeMenuProvider(menuProvider)
+    }
+
+    override fun invalidateCustomMenu() {
+        invalidateMenu()
     }
 }

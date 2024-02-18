@@ -3,6 +3,7 @@
 
     <string name="app_name">Belsev image</string>
     <string name="error_text">Ошибка</string>
+    <string name="success_text">Успех</string>
     <string name="try_again_later">Повторите позднее</string>
     <string name="sign_in_text">Войти</string>
     <string name="login">Логин</string>
@@ -11,6 +12,10 @@
     <string name="created_pattern">Создано: %1$s</string>
     <string name="created">Создано:</string>
     <string name="unknown">неизвестно</string>
+    <string name="delete">Удалить</string>
+    <string name="yes">Да</string>
+    <string name="cancel">Отмена</string>
+    <string name="selected_pattern">Выбрано: %1$s</string>
 
     <!-- Тексты ошибок -->
     <string name="no_internet_error">Нет подключения к интернету</string>
@@ -21,4 +26,8 @@
     <string name="album_toolbar_title">Альбомы</string>
     <!-- Фото -->
     <string name="photo_toolbar_title">Фото</string>
+    <string name="photos_delete_success">Фотографии удалены</string>
+    <string name="photos_delete_error">Не удалось удалить фотографии.\nПопробуйте позднее</string>
+    <string name="delete_photos_header">Удаление фотографий</string>
+    <string name="delete_photos_answer_pattern">Вы уверены, что хотите удалить фотографии?\nБудет удалено: %1$s</string>
 </resources>

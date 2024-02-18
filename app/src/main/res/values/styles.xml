@@ -8,6 +8,7 @@
         <item name="colorControlActivated">@color/light_blue</item>
         <item name="bottomNavigationStyle">@style/BottomNavStyle</item>
         <item name="floatingActionButtonStyle">@style/FABStyle</item>
+        <item name="popupMenuStyle">@style/PopupMenu</item>
     </style>
 
     <style name="AppBottomSheetDialogTheme"
@@ -18,6 +19,10 @@
     <style name="AppModalStyle"
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/details_bottom_sheet_drawable</item>
+    </style>
+
+    <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/popup_background</item>
     </style>
 
     <style name="Button_16" parent="Widget.MaterialComponents.Button.UnelevatedButton">
@@ -32,13 +37,25 @@
         <item name="rippleColor">@color/white</item>
     </style>
 
-    <style name="DialogTheme" parent="DialogParentTheme">
-        <item name="android:paddingRight">16dp</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:windowBackground">@color/shadow</item>
+    <style name="Button_16_dialog_positive" parent="Button_16">
+        <item name="backgroundTint">@color/light_blue</item>
+    </style>
+    
+    <style name="Button_16_dialog_negative" parent="Button_16">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:backgroundTint">@color/negative_button_background</item>
+        <item name="rippleColor">@color/light_blue_disabled</item>
     </style>
 
-    <style name="DialogParentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="DialogTheme" parent="DialogParentTheme">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/Button_16_dialog_positive</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/Button_16_dialog_negative</item>
+        <item name="titleTextAppearance">@style/Text_20_black_bold</item>
+        <item name="textAppearanceBodyMedium">@style/EditTextStyle</item>
+    </style>
+
+    <style name="DialogParentTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:paddingRight">0dp</item>
         <item name="android:paddingLeft">0dp</item>
         <item name="android:layout_width">match_parent</item>
@@ -81,6 +98,11 @@
         <item name="fontFamily">@font/rubik_regular</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">16sp</item>
+    </style>
+    
+    <style name="Text_20_black_bold" parent="EditTextStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Text_Black_12" parent="EditTextStyle">

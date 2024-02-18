@@ -3,32 +3,63 @@ package com.example.picturegallery.feature.photos.adapter.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import com.example.picturegallery.databinding.PhotoItemBinding
 import com.example.picturegallery.feature.photos.adapter.viewholder.PhotosViewHolder
 import com.example.picturegallery.feature.photos.uistate.PhotosAdapterUiState
 
-class PhotosAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PhotosAdapter(
+    private val onPhotoclick: (Int) -> Unit,
+    private val onPhotoSelect: (Int, Boolean) -> Unit
+) : ListAdapter<PhotosAdapterUiState, PhotosViewHolder>(DiffCallback) {
 
-    private var photoList: MutableList<PhotosAdapterUiState> = mutableListOf()
-
-    fun submitList(photos: List<PhotosAdapterUiState>) = with(photoList) {
-        DiffUtil.calculateDiff(PhotoDiffUtil(this, photos)).run {
-            addAll(photos)
-            dispatchUpdatesTo(this@PhotosAdapter)
-        }
+    companion object {
+        var isSelectionMode = false
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotosViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return PhotosViewHolder(
-            PhotoItemBinding.inflate(inflater, parent, false)
+            PhotoItemBinding.inflate(inflater, parent, false),
+            onPhotoclick,
+            onPhotoSelect
         )
     }
 
-    override fun getItemCount() = photoList.size
+    override fun onBindViewHolder(holder: PhotosViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as PhotosViewHolder).bind(photoList[position])
+    override fun onBindViewHolder(
+        holder: PhotosViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        when (payloads.lastOrNull()) {
+            true -> {
+                holder.bindSelected(getItem(position))
+            }
+            else -> {
+                onBindViewHolder(holder, position)
+            }
+        }
+    }
+
+    private object DiffCallback : DiffUtil.ItemCallback<PhotosAdapterUiState>() {
+        override fun areItemsTheSame(
+            oldItem: PhotosAdapterUiState,
+            newItem: PhotosAdapterUiState
+        ) = oldItem.id == newItem.id
+
+        override fun areContentsTheSame(
+            oldItem: PhotosAdapterUiState,
+            newItem: PhotosAdapterUiState
+        ) = oldItem == newItem
+
+        override fun getChangePayload(
+            oldItem: PhotosAdapterUiState,
+            newItem: PhotosAdapterUiState
+        ): Any? = if (oldItem.isSelected != newItem.isSelected) true else null
+
     }
 }

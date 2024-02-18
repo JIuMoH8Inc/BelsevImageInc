@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.picturegallery.application.MyApp
@@ -48,7 +49,7 @@ abstract class BaseFragment<VM : BaseViewModel>(@LayoutRes layout: Int) : Fragme
 
     private fun observeMessageFlow() {
         viewModel.baseUiAction.observe(viewLifecycleOwner) { action ->
-            handleAction(action)
+            handleBaseAction(action)
         }
     }
 
@@ -68,7 +69,19 @@ abstract class BaseFragment<VM : BaseViewModel>(@LayoutRes layout: Int) : Fragme
         listener.showBackButton(isShow)
     }
 
-    private fun handleAction(action: BaseErrorAction) {
+    protected fun setMenuProvider(menuProvider: MenuProvider) {
+        listener.setMenuProvider(menuProvider)
+    }
+
+    protected fun removeMenuProvider(menuProvider: MenuProvider) {
+        listener.removeCustomMenuProvider(menuProvider)
+    }
+
+    protected fun invalidateMenu() {
+        listener.invalidateCustomMenu()
+    }
+
+    private fun handleBaseAction(action: BaseErrorAction) {
         when (action) {
             is BaseErrorAction.ShowErrorBanner -> {
                 BannerManager.showErrorBanner(

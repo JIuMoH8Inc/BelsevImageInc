@@ -16,6 +16,11 @@ class PhotosRepositoryImpl @Inject constructor(
             photosRemoteDataSource.getPhotos(skip, take)
         }
 
+    override suspend fun getPhotosWithoutPaging() =
+        withContext(appDispatchers.io) {
+            photosRemoteDataSource.getPhotos()
+        }
+
     override suspend fun deletePhotos(photoIdList: List<Int>) =
         withContext(appDispatchers.io) {
             photosRemoteDataSource.deletePhotos(photoIdList)

@@ -1,7 +1,9 @@
 package com.example.picturegallery.ui.activity
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.picturegallery.R
@@ -36,6 +38,15 @@ class AppActivity : AppCompatActivity(), ActionBarListener {
 
     }
 
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+         android.R.id.home -> {
+            onBackPressedDispatcher.onBackPressed()
+            true
+        }
+
+        else -> false
+    }
+
     override fun hideActionBar() {
         supportActionBar?.hide()
     }
@@ -45,13 +56,25 @@ class AppActivity : AppCompatActivity(), ActionBarListener {
     }
 
     override fun setActionBarTitle(title: String) {
-        supportActionBar?.apply {
-            this.title = title
-            show()
+        supportActionBar?.let {
+            it.title = title
+            it.show()
         }
     }
 
     override fun showBackButton(isShow: Boolean) {
         supportActionBar?.setDisplayHomeAsUpEnabled(isShow)
+    }
+
+    override fun setMenuProvider(menuProvider: MenuProvider) {
+        addMenuProvider(menuProvider)
+    }
+
+    override fun removeCustomMenuProvider(menuProvider: MenuProvider) {
+        removeMenuProvider(menuProvider)
+    }
+
+    override fun invalidateCustomMenu() {
+        invalidateMenu()
     }
 }

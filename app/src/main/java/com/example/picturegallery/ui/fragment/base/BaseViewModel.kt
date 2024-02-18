@@ -1,6 +1,5 @@
 package com.example.picturegallery.ui.fragment.base
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.picturegallery.R
 import com.example.picturegallery.application.MyApp
@@ -31,9 +30,15 @@ open class BaseViewModel : ViewModel() {
         }
     }
 
-    private fun showErrorBanner(message: String) {
+    protected fun showErrorBanner(message: String) {
         _uiAction.tryEmit(
             BaseErrorAction.ShowErrorBanner(message)
+        )
+    }
+
+    protected fun showSuccessBanner(message: String) {
+        _uiAction.tryEmit(
+            BaseErrorAction.ShowSuccessBanner(message)
         )
     }
 }

@@ -6,6 +6,7 @@ import com.example.picturegallery.domain.model.album.Album
 import com.example.picturegallery.domain.model.album.AlbumPhoto
 import com.example.picturegallery.domain.model.album.CreateAlbumRequest
 import com.example.picturegallery.domain.model.album.UpdateAlbumRequest
+import com.example.picturegallery.domain.model.album.UpdateCoverRequest
 import com.example.picturegallery.domain.model.dispatchers.AppDispatchers
 import com.example.picturegallery.domain.repository.AlbumRepository
 import kotlinx.coroutines.withContext
@@ -25,9 +26,9 @@ class AlbumRepositoryImpl @Inject constructor(
             albumRemoteDataSource.deleteAlbum(id)
         }
 
-    override suspend fun getAlbumPhotos(albumId: Int, offset: Int, count: Int): AlbumPhoto =
+    override suspend fun getAlbumPhotos(albumId: Int): AlbumPhoto =
         withContext(appDispatchers.io) {
-            albumRemoteDataSource.getAlbumPhotos(albumId, offset, count)
+            albumRemoteDataSource.getAlbumPhotos(albumId)
         }
 
     override suspend fun createAlbum(createAlbumRequest: CreateAlbumRequest) =
@@ -48,5 +49,10 @@ class AlbumRepositoryImpl @Inject constructor(
     override suspend fun updateAlbum(updateAlbumRequest: UpdateAlbumRequest) =
         withContext(appDispatchers.io) {
             albumRemoteDataSource.updateAlbum(updateAlbumRequest)
+        }
+
+    override suspend fun updateAlbumCover(request: UpdateCoverRequest) =
+        withContext(appDispatchers.io) {
+            albumRemoteDataSource.updateAlbumCover(request)
         }
 }

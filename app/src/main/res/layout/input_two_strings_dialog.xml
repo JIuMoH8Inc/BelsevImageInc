@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_background_16"
+        android:orientation="vertical"
+        android:elevation="0dp"
+    android:layout_gravity="center">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/header_text"
+            style="@style/Text_20_black_bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/MaterialEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/first_input"
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:hint="@string/album_name_hint"
+            app:layout_constraintTop_toBottomOf="@id/header_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/first"
+                android:layout_height="wrap_content"
+                style="@style/EditTextOneLineStyle"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/MaterialEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/second_input"
+            android:layout_marginTop="@dimen/small_top_margin"
+            android:hint="@string/album_desc_hint"
+            android:layout_marginHorizontal="@dimen/horizontal_margin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/second"
+                android:layout_height="wrap_content"
+                style="@style/EditTextOneLineStyle"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Button_16_dialog_negative"
+                android:gravity="center"
+                android:layout_marginEnd="8dp"
+                android:padding="8dp"
+                android:id="@+id/negative_button"
+                android:layout_weight="1"
+                app:layout_constraintTop_toBottomOf="@id/answer_text"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Button_16_dialog_positive"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:id="@+id/positive_button"
+                app:layout_constraintTop_toBottomOf="@id/answer_text"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>

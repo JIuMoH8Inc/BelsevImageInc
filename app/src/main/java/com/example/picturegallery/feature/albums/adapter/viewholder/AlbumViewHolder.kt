@@ -1,19 +1,45 @@
 package com.example.picturegallery.feature.albums.adapter.viewholder
 
+import android.view.View
+import androidx.appcompat.widget.PopupMenu
+
 import androidx.recyclerview.widget.RecyclerView
-import com.example.picturegallery.databinding.AlbumItemBinding
-import com.example.picturegallery.feature.albums.uistate.AlbumAdapterUiState
+import com.example.picturegallery.R
+import com.example.picturegallery.databinding.AlbumCardBinding
+import com.example.picturegallery.feature.albums.AlbumAdapterUiState
 
-class AlbumViewHolder(private val binding: AlbumItemBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(albumUiState: AlbumAdapterUiState, onAlbumCLick: (Int) -> Unit, onMoreClick: (AlbumAdapterUiState) -> Unit)  = with(binding) {
-        albumThumbnail.setImageBitmap(albumUiState.albumThumb)
-
-        more.setOnClickListener {
-            onMoreClick(albumUiState)
+class AlbumViewHolder(
+    private val binding: AlbumCardBinding,
+    private val onItemClick: (Int) -> Unit,
+    private val onMenuItemClick: (Int, Int) -> Unit
+) : RecyclerView.ViewHolder(binding.root) {
+    fun bind(albumUiState: AlbumAdapterUiState) = with(binding) {
+        albumThumb.setImageBitmap(albumUiState.albumThumb)
+        albumTitle.text = albumUiState.albumName
+        albumItemCount.isSelected = true
+        albumItemCount.text = albumUiState.itemCount
+        with(albumDescription) {
+            text = albumUiState.albumDesc
         }
 
         root.setOnClickListener {
-            onAlbumCLick(albumUiState.id)
+            onItemClick(albumUiState.id)
+        }
+
+        more.setOnClickListener {
+            createPopUpMenu(it, albumUiState.id)
+        }
+    }
+
+    private fun createPopUpMenu(view: View, albumId: Int) {
+        PopupMenu(view.context, view).apply {
+            menuInflater.inflate(R.menu.album_menu, menu)
+            setForceShowIcon(true)
+            setOnMenuItemClickListener { menuItem ->
+                onMenuItemClick(menuItem.itemId, albumId)
+                true
+            }
+            show()
         }
     }
 }

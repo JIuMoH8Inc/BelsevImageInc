@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/change_cover"
+        android:title="@string/change_cover"
+        android:icon="@drawable/ic_photo" />
+
+    <item android:id="@+id/change_title"
+        android:title="@string/change_title_and_desc"
+        android:icon="@drawable/ic_edit" />
+
+    <item
+        android:id="@+id/delete_album"
+        android:title="@string/delete"
+        android:icon="@drawable/ic_delete_red" />
+</menu>

@@ -6,12 +6,71 @@
     app:startDestination="@id/albumFragment">
     <fragment
         android:id="@+id/albumFragment"
-        android:name="com.example.picturegallery.feature.albums.fragment.AlbumFragment"
+        android:name="com.example.picturegallery.feature.albums.AlbumFragment"
         android:label="album_photo_fragment"
         tools:layout="@layout/list_item_fragment" />
     <fragment
         android:id="@+id/photosFragment"
-        android:name="com.example.picturegallery.feature.photos.fragment.PhotosFragment"
+        android:name="com.example.picturegallery.feature.photos.PhotosFragment"
         android:label="photos_fragment"
-        tools:layout="@layout/list_item_fragment" />
+        tools:layout="@layout/list_item_fragment" >
+        <argument
+            android:name="isAddToAlbum"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/albumContentFragment"
+        android:name="com.example.picturegallery.feature.album_content.AlbumContentFragment"
+        android:label="AlbumContentFragment"
+        tools:layout="@layout/list_item_fragment">
+        <argument
+            android:name="albumId"
+            app:argType="integer"
+            android:defaultValue="-1"/>
+        <argument
+            android:name="albumName"
+            app:argType="string"
+            android:defaultValue=""/>
+    </fragment>
+    <fragment
+        android:id="@+id/createAlbumFragment"
+        android:name="com.example.picturegallery.feature.create_album.CreateAlbumFragment"
+        android:label="CreateAlbumFragment"
+        tools:layout="@layout/create_album_layout">
+        <argument
+            android:name="photoList"
+            app:argType="integer[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <dialog
+        android:id="@+id/changeAlbumCoverBottomSheet"
+        android:name="com.example.picturegallery.feature.change_album_cover.ChangeAlbumCoverBottomSheet"
+        android:label="ChangeAlbumCoverBottomSheet"
+        tools:layout="@layout/choose_cover_photo_layout">
+        <argument
+            android:name="albumId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </dialog>
+    <dialog
+        android:id="@+id/addPhotoAlbumTypeBottomSheet"
+        android:name="com.example.picturegallery.feature.photos.choose_add_photo_type.AddPhotoAlbumTypeBottomSheet"
+        android:label="AddPhotoAlbumTypeBottomSheet"
+        tools:layout="@layout/choose_add_photo_album_type">
+        <argument
+            android:name="photoList"
+            app:argType="integer[]" />
+    </dialog>
+    <dialog
+        android:id="@+id/chooseAlbumBottomSheet"
+        android:name="com.example.picturegallery.feature.choose_album.ChooseAlbumBottomSheet"
+        android:label="ChooseAlbumBottomSheet"
+        tools:layout="@layout/choose_album_bottom_sheet">
+        <argument
+            android:name="photoList"
+            app:argType="integer[]" />
+    </dialog>
+
 </navigation>

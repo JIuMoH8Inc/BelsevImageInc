@@ -1,33 +1,42 @@
 package com.example.picturegallery.feature.albums.adapter.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.example.picturegallery.databinding.AlbumItemBinding
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import com.example.picturegallery.databinding.AlbumCardBinding
 import com.example.picturegallery.feature.albums.adapter.viewholder.AlbumViewHolder
-import com.example.picturegallery.feature.albums.uistate.AlbumAdapterUiState
+import com.example.picturegallery.feature.albums.AlbumAdapterUiState
 
-class AlbumAdapter(private val onItemClick: (Int) -> Unit, private val onMoreClick: (AlbumAdapterUiState) -> Unit) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AlbumAdapter(
+    private val onItemClick: (Int) -> Unit,
+    private val onMenuItemClick: (Int, Int) -> Unit
+) :
+    ListAdapter<AlbumAdapterUiState, AlbumViewHolder>(DiffCallback) {
 
-    private var albumList: List<AlbumAdapterUiState> = emptyList()
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun setNewAlbumList(albumList: List<AlbumAdapterUiState>) {
-        this.albumList = albumList
-        notifyDataSetChanged()
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return AlbumViewHolder(AlbumItemBinding.inflate(inflater, parent, false))
+        return AlbumViewHolder(
+            AlbumCardBinding.inflate(inflater, parent, false),
+            onItemClick,
+            onMenuItemClick
+        )
     }
 
-    override fun getItemCount() = albumList.size
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as AlbumViewHolder).bind(albumList[position], onItemClick, onMoreClick)
+    override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
+        holder.bind(getItem(position))
     }
 
+    private object DiffCallback: DiffUtil.ItemCallback<AlbumAdapterUiState>() {
+        override fun areItemsTheSame(
+            oldItem: AlbumAdapterUiState,
+            newItem: AlbumAdapterUiState
+        ) = oldItem.id == newItem.id
+
+        override fun areContentsTheSame(
+            oldItem: AlbumAdapterUiState,
+            newItem: AlbumAdapterUiState
+        ) = oldItem == newItem
+
+    }
 }

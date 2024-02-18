@@ -11,6 +11,17 @@
     <string name="created_pattern">Создано: %1$s</string>
     <string name="created">Создано:</string>
     <string name="unknown">неизвестно</string>
+    <string name="cancel">Отмена</string>
+    <string name="success">Успех</string>
+    <string name="fail">Неудача</string>
+    <string name="create">Создать</string>
+    <string name="delete">Удалить</string>
+    <string name="yes">Да</string>
+    <string name="selected_pattern">Выбрано: %1$s</string>
+    <string name="ok">Ок</string>
+    <string name="change">Изменить</string>
+    <string name="refresh">Обновить</string>
+    <string name="add">Добавить</string>
 
     <!-- Тексты ошибок -->
     <string name="no_internet_error">Нет подключения к интернету</string>
@@ -19,6 +30,48 @@
 
     <!-- Альбомы -->
     <string name="album_toolbar_title">Альбомы</string>
+    <string name="album_count_item_pattern">Фото в альбоме: %1$s</string>
+    <string name="change_cover">Сменить обложку</string>
+    <string name="change_title_and_desc">Сменить название и описание</string>
+    <string name="delete_album_answer_header">Удаление альбома</string>
+    <string name="delete_album_answer_text">Вы уверены, что хотите удалить альбом %1$s?</string>
+    <string name="delete_album_success">Альбом %1$s успешно удален</string>
+    <string name="delete_album_error">Не удалось удалить альбом %1$s.\nПопробуйте снова позднее</string>
+    <string name="empty_album_list_header">У Вас пока нет альбомов</string>
+    <string name="empty_album_list_subtitle">Вы можете создать новый альбом</string>
+    <string name="create_album_toolbar">Новый альбом</string>
+    <string name="album_data_header">Данные об альбоме</string>
+    <string name="album_name_hint">Название альбома</string>
+    <string name="album_desc_hint">Описание (необязательно)</string>
+    <string name="album_create_photos_list_header">Выберите фотографии</string>
+    <string name="create_album_empty_name_error">Введите название альбома</string>
+    <string name="create_album_photo_list_empty_error">Выберите хотя бы одну фотографию</string>
+    <string name="create_album_loading_photos_error_header">Произошла ошибка</string>
+    <string name="create_album_loading_photos_subtitle">Попробуйте еще раз позднее</string>
+    <string name="create_album_loading_photos_button_text">Обновить</string>
+    <string name="create_album_success">Новый альбом успешно создан</string>
+    <string name="create_album_error">Не удалось создать новый альбом.\nПопробуйте позднее</string>
+    <string name="change_album_data">Изменение альбома</string>
+    <string name="change_album_data_success">Название и описание обновлены</string>
+    <string name="change_album_data_error">Не удалось обновить название.\nПопробуйте позднее</string>
+    <string name="change_album_cover_choose">Выберите обложку</string>
+    <string name="change_cover_success">Обложка успешно обновлена</string>
+    <string name="change_cover_error">Не удалось обновить обложку.\nПопробуйте позднее</string>
+    <string name="delete_photos_from_album_answer_pattern">Вы уверены, что хотите удалить фотографии из альбома?\nБудет удалено: %1$s</string>
+    <string name="album_content_loading_error_header">Не удалось загрузить фотографии из альбома</string>
+    <string name="album_content_loading_error_subtitle">Что-то пошло не так. Попробуйте позднее</string>
+    <string name="add_to_album_toolbar">Добавление фотографий</string>
+    <string name="add_to_album_success">Фотографии успешно добавлены</string>
+    <string name="add_to_album_error">Не удалось добавить фотографии.\nПопробуйте позднее</string>
+    <string name="choose_album">Выберите альбом</string>
+
     <!-- Фото -->
     <string name="photo_toolbar_title">Фото</string>
+    <string name="photos_delete_success">Фотографии удалены</string>
+    <string name="photos_delete_error">Не удалось удалить фотографии.\nПопробуйте позднее</string>
+    <string name="delete_photos_header">Удаление фотографий</string>
+    <string name="delete_photos_answer_pattern">Вы уверены, что хотите удалить фотографии?\nБудет удалено: %1$s</string>
+    <string name="add_to_new_album">Создать новый альбом</string>
+    <string name="add_to_exist_album">Добавить в уже существующий</string>
+    <string name="add_to_album">В альбом</string>
 </resources>

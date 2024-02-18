@@ -57,7 +57,7 @@ class NetworkModule {
             )
             .addInterceptor { chain ->
                 chain.proceed(
-                    chain.request().newBuilder().addHeader("Authorization", "Bearer $token").build()
+                    chain.request().newBuilder().addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ4NDUzODVmLWE5MzAtNDk1Ny1iYjYxLWIyM2ZlNzgzMmU1NCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ0ZXN0MiIsIkFzcE5ldC5JZGVudGl0eS5TZWN1cml0eVN0YW1wIjoiNkc2SFZBTkhXVVpOVlk1NURaNTNHWVpTWlYySVRYQjYiLCJleHAiOjE3MTA4NDQyNTQsImlzcyI6InBob3RvLmJlbHNldi5zdSJ9.c1QzYMKz7pQlSpeKaa6azzafuOdw5mLSYKoOQd7harQ").build()
                 )
             }
             .protocols(listOf(Protocol.HTTP_1_1))

@@ -5,6 +5,7 @@ import com.example.picturegallery.domain.model.album.Album
 import com.example.picturegallery.domain.model.album.AlbumPhoto
 import com.example.picturegallery.domain.model.album.CreateAlbumRequest
 import com.example.picturegallery.domain.model.album.UpdateAlbumRequest
+import com.example.picturegallery.domain.model.album.UpdateCoverRequest
 import retrofit2.Retrofit
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -30,10 +31,14 @@ interface AlbumRemoteDataSource {
     suspend fun deleteAlbum(@Query("albumId") id: Int)
 
     @GET("$albumUrl/getAlbum")
-    suspend fun getAlbumPhotos(@Query("albumId") id: Int, @Query("skip") offset: Int, @Query("take") count: Int): AlbumPhoto
+    suspend fun getAlbumPhotos(
+        @Query("albumId") id: Int,
+        @Query("take") offset: Int = 100000,
+        @Query("skip") skip: Int = 0
+    ): AlbumPhoto
 
     @POST("$albumUrl/createAlbum")
-    suspend fun createAlbum(@Body createRequest: CreateAlbumRequest)
+    suspend fun createAlbum(@Body createRequest: CreateAlbumRequest): Int
 
     @POST("$albumUrl/addToAlbum")
     suspend fun addToAlbum(@Body addToAlbumRequest: EditAlbumPhotosRequest)
@@ -43,5 +48,8 @@ interface AlbumRemoteDataSource {
 
     @POST("$albumUrl/updateAlbum")
     suspend fun updateAlbum(@Body updateAlbumRequest: UpdateAlbumRequest)
+
+    @POST("$albumUrl/changeAlbumCover")
+    suspend fun updateAlbumCover(@Body request: UpdateCoverRequest)
 
 }

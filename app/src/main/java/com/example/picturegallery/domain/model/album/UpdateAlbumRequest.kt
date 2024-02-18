@@ -8,5 +8,5 @@ data class UpdateAlbumRequest(
     val albumId: Int = 0,
     val name: String = "",
     val description: String = "",
-    val isPublic: Boolean = false
+    val isPublic: Boolean = true
 ) : Parcelable

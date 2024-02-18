@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/choose_bottom_sheet_background"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        style="@style/Text_16_black"
+        android:gravity="end"
+        android:paddingVertical="8dp"
+        android:text="@string/add_to_new_album"
+        android:id="@+id/create_new_album"
+        android:foreground="?attr/selectableItemBackground"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        style="@style/Text_16_black"
+        android:paddingVertical="8dp"
+        android:text="@string/add_to_exist_album"
+        android:gravity="end"
+        android:id="@+id/add_to_exist_album"
+        android:foreground="?attr/selectableItemBackground"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        style="@style/Text_16_red"
+        android:text="@string/cancel"
+        android:gravity="end"
+        android:id="@+id/cancel_button"
+        android:foreground="?attr/selectableItemBackground"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

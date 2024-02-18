@@ -8,6 +8,8 @@
         <item name="colorControlActivated">@color/light_blue</item>
         <item name="bottomNavigationStyle">@style/BottomNavStyle</item>
         <item name="floatingActionButtonStyle">@style/FABStyle</item>
+        <item name="popupMenuStyle">@style/PopupMenu</item>
+        <item name="toolbarStyle">@style/Toolbar</item>
     </style>
 
     <style name="AppBottomSheetDialogTheme"
@@ -18,6 +20,21 @@
     <style name="AppModalStyle"
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/details_bottom_sheet_drawable</item>
+    </style>
+
+    <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/popup_background</item>
+    </style>
+
+    <style name="Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/light_blue</item>
+        <item name="titleTextAppearance">@style/ToolbarTitleStyle</item>
+    </style>
+
+    <style name="ToolbarTitleStyle" parent="TextAppearance.AppCompat.Headline">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/rubik_medium</item>
     </style>
 
     <style name="Button_16" parent="Widget.MaterialComponents.Button.UnelevatedButton">
@@ -32,18 +49,39 @@
         <item name="rippleColor">@color/white</item>
     </style>
 
-    <style name="DialogTheme" parent="DialogParentTheme">
-        <item name="android:paddingRight">16dp</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:windowBackground">@color/shadow</item>
+    <style name="Button_16_dialog_positive" parent="Button_16">
+        <item name="backgroundTint">@color/light_blue</item>
     </style>
 
-    <style name="DialogParentTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:paddingRight">0dp</item>
-        <item name="android:paddingLeft">0dp</item>
+    <style name="Button_16_dialog_negative" parent="Button_16">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:backgroundTint">@color/negative_button_background</item>
+        <item name="rippleColor">@color/light_blue_disabled</item>
+    </style>
+
+    <style name="Button_16_blue_8" parent="Button_16">
+        <item name="android:backgroundTint">@color/light_blue</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+
+    <style name="DialogTheme" parent="DialogParentTheme">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/Button_16_dialog_positive</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/Button_16_dialog_negative</item>
+        <item name="titleTextAppearance">@style/Text_20_black_bold</item>
+        <item name="textAppearanceBodyMedium">@style/EditTextStyle</item>
+        <item name="colorPrimary">@color/light_blue</item>
+    </style>
+
+    <style name="DialogParentTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:statusBarColor">@color/white</item>
+    </style>
+
+    <style name="NoBackgroundDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@null</item>
     </style>
 
     <style name="main_button_text_style">
@@ -62,7 +100,7 @@
         <item name="boxCornerRadiusTopEnd">8dp</item>
         <item name="boxCornerRadiusTopStart">8dp</item>
         <item name="hintTextColor">@color/black</item>
-        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxBackgroundColor">@color/negative_button_background</item>
     </style>
 
     <style name="MaterialEditTextPassword" parent="MaterialEditText">
@@ -83,6 +121,11 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="Text_20_black_bold" parent="EditTextStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Text_Black_12" parent="EditTextStyle">
         <item name="android:textSize">12sp</item>
     </style>
@@ -91,13 +134,50 @@
         <item name="fontFamily">@font/rubik_bold</item>
     </style>
 
+    <style name="Text_22_black_bold" parent="EditTextStyle">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text_error_style" parent="EditTextStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/red</item>
+    </style>
+
     <style name="EditTextOneLineStyle" parent="EditTextStyle">
         <item name="maxLines">1</item>
-        <item name="android:inputType">text</item>
+        <item name="android:inputType">textCapWords|text</item>
     </style>
 
     <style name="EditTextOneLinePasswordStyle" parent="EditTextOneLineStyle">
         <item name="android:inputType">textPassword</item>
+    </style>
+
+    <style name="Text_16_black">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/rubik_regular</item>
+    </style>
+
+    <style name="Text_14_black" parent="Text_16_black">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Text_16_red" parent="Text_16_black">
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="Text_14_brand_blue">
+        <item name="android:textColor">@color/light_blue</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/rubik_regular</item>
+    </style>
+
+    <style name="ItemCardStyle">
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="elevation">@dimen/card_elevation</item>
+        <item name="android:shadowColor">@color/shadow</item>
+        <item name="android:layout_margin">@dimen/top_margin</item>
     </style>
 
     <style name="BottomNavStyle" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
